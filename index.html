@@ -1,0 +1,1889 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agroplasma España - Biotecnología Celular y Nutrición Ecológica 2026</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bio: {
+                            deep: '#060d08',
+                            dark: '#0a160d',
+                            surface: '#0f2014',
+                            border: '#1b3824',
+                            accent: '#22c55e',
+                            cyan: '#06b6d4',
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            200: '#bbf7d0',
+                            300: '#86efac',
+                            400: '#4ade80',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d'
+                        },
+                        amberBio: {
+                            50: '#fffbeb',
+                            100: '#fef3c7',
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                            700: '#b45309'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        tech: ['Space Grotesk', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #060d08;
+            color: #e2e8f0;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .glass-panel {
+            background: rgba(15, 32, 20, 0.72);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(34, 197, 94, 0.16);
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5);
+        }
+
+        .glass-panel-light {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-header {
+            background: rgba(6, 13, 8, 0.88);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(34, 197, 94, 0.18);
+        }
+
+        #algaeCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.45;
+        }
+
+        .orange-glow {
+            box-shadow: 0 0 35px -5px rgba(245, 147, 0, 0.22);
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a160d;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1b3824;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #22c55e;
+        }
+
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white; color: black; }
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-[#F59300] selection:text-black">
+
+    <!-- Canvas flotante de microalgas vivas -->
+    <canvas id="algaeCanvas"></canvas>
+
+    <!-- HEADER DE NAVEGACIÓN -->
+    <header class="sticky top-0 z-40 glass-header no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- Logo Corporativo -->
+            <a href="javascript:void(0)" onclick="showSection('inicio')" class="flex items-center gap-3 group">
+                <img src="logo-agroplasma.png" 
+                     alt="Agroplasma" 
+                     class="h-10 sm:h-11 w-auto object-contain"
+                     onerror="this.onerror=null; this.classList.add('hidden'); document.getElementById('header-logo-fallback').classList.remove('hidden');">
+                
+                <div id="header-logo-fallback" class="hidden flex items-center font-tech text-2xl font-black tracking-tight">
+                    <span class="text-[#F59300]">Agro</span><span class="text-bio-accent">plasma</span>
+                </div>
+            </a>
+
+            <!-- Menú Principal Escritorio -->
+            <nav class="hidden lg:flex items-center gap-7 sm:gap-8 text-xs font-bold tracking-wider uppercase font-tech text-slate-300">
+                <button onclick="showSection('inicio')" class="nav-link text-bio-accent transition-colors py-2 uppercase" data-target="inicio">INICIO</button>
+                <button onclick="showSection('ice-tech')" class="nav-link hover:text-[#FFA928] transition-colors py-2 uppercase" data-target="ice-tech">TECNOLOGÍA I.C.E.</button>
+                <button onclick="showSection('productos')" class="nav-link hover:text-bio-accent transition-colors py-2 uppercase" data-target="productos">CATÁLOGO PRODUCTOS</button>
+                <button onclick="showSection('nosotros')" class="nav-link hover:text-bio-accent transition-colors py-2 uppercase" data-target="nosotros">QUIÉNES SOMOS</button>
+                <button onclick="showSection('blog')" class="nav-link hover:text-bio-accent transition-colors py-2 uppercase" data-target="blog">ENSAYOS & BLOG</button>
+                <button onclick="showSection('contacto')" class="nav-link hover:text-bio-accent transition-colors py-2 uppercase" data-target="contacto">CONTACTO</button>
+            </nav>
+
+            <!-- Acciones Rápidas -->
+            <div class="flex items-center gap-3">
+                <button onclick="showSection('productos'); document.getElementById('searchProductInput').focus();" class="p-2.5 rounded-xl bg-bio-surface hover:bg-bio-dark text-slate-300 border border-bio-border transition-colors" title="Buscar en catálogo">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                </button>
+
+                <!-- Botón Menú Móvil -->
+                <button onclick="toggleMobileMenu()" class="lg:hidden p-2 rounded-xl text-slate-200 hover:text-white bg-bio-surface border border-bio-border">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/></svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Menú Desplegable Móvil -->
+        <div id="mobileMenu" class="hidden lg:hidden border-t border-bio-border bg-bio-deep/95 px-6 py-5 space-y-3 font-tech text-sm font-bold uppercase tracking-wider text-slate-300">
+            <button onclick="showSection('inicio'); toggleMobileMenu();" class="block w-full text-left py-2 text-bio-accent uppercase">INICIO</button>
+            <button onclick="showSection('ice-tech'); toggleMobileMenu();" class="block w-full text-left py-2 hover:text-[#FFA928] uppercase">TECNOLOGÍA I.C.E.</button>
+            <button onclick="showSection('productos'); toggleMobileMenu();" class="block w-full text-left py-2 hover:text-bio-accent uppercase">CATÁLOGO PRODUCTOS (FERTICELL®)</button>
+            <button onclick="showSection('nosotros'); toggleMobileMenu();" class="block w-full text-left py-2 hover:text-bio-accent uppercase">QUIÉNES SOMOS & FÁBRICA</button>
+            <button onclick="showSection('blog'); toggleMobileMenu();" class="block w-full text-left py-2 hover:text-bio-accent uppercase">ENSAYOS TÉCNICOS & BLOG</button>
+            <button onclick="showSection('contacto'); toggleMobileMenu();" class="block w-full text-left py-2 hover:text-bio-accent uppercase">CONTACTO B2B</button>
+        </div>
+    </header>
+
+    <!-- CONTENEDOR PRINCIPAL DE SECCIONES -->
+    <main id="app-container" class="relative z-10">
+
+        <!-- ============================================== -->
+        <!-- SECCIÓN 1: INICIO (HOME)                       -->
+        <!-- ============================================== -->
+        <section id="section-inicio" class="view-section">
+            
+            <!-- Hero Principal -->
+            <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-20 lg:pt-20 lg:pb-28">
+                <div class="grid lg:grid-cols-12 gap-12 items-center">
+                    
+                    <div class="lg:col-span-7 space-y-8">
+                        <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-[#F59300]/10 border border-[#F59300]/30 text-[#FFA928] text-xs font-mono font-bold">
+                            <span class="w-2 h-2 rounded-full bg-[#F59300] animate-pulse"></span>
+                            BIOTECNOLOGÍA CELULAR VEGETAL • ESPAÑA
+                        </div>
+
+                        <h1 class="font-tech text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
+                            Nutrición Agrícola de <br/>
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-bio-accent via-emerald-400 to-[#FFA928]">
+                                Intercambio Celular Directo
+                            </span>
+                        </h1>
+
+                        <p class="text-base sm:text-lg text-slate-300 max-w-2xl font-normal leading-relaxed">
+                            Fabricamos bioestimulantes y fertilizantes ecológicos certificados basados en soluciones celulares de microalgas de agua dulce. Máxima asimilación foliar y radicular inmediata sin gasto metabólico para la planta y con cero residuo salino.
+                        </p>
+
+                        <!-- Botones de Acción -->
+                        <div class="flex flex-wrap items-center gap-4 pt-2">
+                            <button onclick="showSection('productos')" class="px-6 py-4 rounded-xl bg-bio-accent hover:bg-bio-400 text-bio-deep font-tech font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-xl shadow-bio-accent/20 flex items-center gap-2">
+                                <span>Explorar Gama Ferticell®</span>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                            </button>
+                        </div>
+
+                        <!-- Barra de Estadísticas Comerciales -->
+                        <div class="grid grid-cols-3 gap-6 pt-8 border-t border-bio-border">
+                            <div>
+                                <span class="font-tech text-3xl font-extrabold text-bio-accent block">100%</span>
+                                <span class="text-[11px] font-mono text-slate-400 uppercase font-medium">Biodisponibilidad Celular</span>
+                            </div>
+                            <div>
+                                <span class="font-tech text-3xl font-extrabold text-[#FFA928] block">0 ATP</span>
+                                <span class="text-[11px] font-mono text-slate-400 uppercase font-medium">Gasto Energético de Planta</span>
+                            </div>
+                            <div>
+                                <span class="font-tech text-3xl font-extrabold text-bio-cyan block">+25</span>
+                                <span class="text-[11px] font-mono text-slate-400 uppercase font-medium">Países con Registro</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Vídeo Dinámica Foliar I.C.E. con Autoplay en bucle -->
+                    <div class="lg:col-span-5">
+                        <div class="relative glass-panel rounded-3xl p-4 sm:p-5 border border-[#F59300]/30 shadow-2xl overflow-hidden orange-glow">
+                            <!-- Destello estético perimetral -->
+                            <div class="absolute -right-16 -top-16 w-56 h-56 bg-[#F59300]/15 rounded-full blur-3xl pointer-events-none"></div>
+                            <div class="absolute -left-16 -bottom-16 w-52 h-52 bg-bio-accent/10 rounded-full blur-3xl pointer-events-none"></div>
+                            
+                            <!-- Barra Superior del Módulo de Vídeo -->
+                            <div class="flex items-center justify-between pb-3 border-b border-bio-border relative z-10">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-2.5 h-2.5 rounded-full bg-bio-accent animate-ping"></span>
+                                    <span class="font-tech text-xs font-bold uppercase tracking-wider text-white">Dinámica Celular en Vivo</span>
+                                </div>
+                                <span class="text-[10px] font-mono text-[#FFA928] px-2 py-0.5 rounded bg-[#F59300]/10 border border-[#F59300]/30 uppercase font-bold">
+                                    I.C.E. 3D SIMULATION
+                                </span>
+                            </div>
+
+                            <!-- Contenedor de Vídeo con Autoplay, Bucle y Silencio -->
+                            <div class="relative mt-3.5 rounded-2xl overflow-hidden bg-black border border-bio-border shadow-inner group aspect-video">
+                                <video id="iceTechVideo" 
+                                       class="w-full h-full object-cover rounded-2xl" 
+                                       autoplay 
+                                       loop 
+                                       muted 
+                                       playsinline 
+                                       preload="auto"
+                                       poster="img/ice-foliar-penetration.jpg">
+                                    <source src="video-ice-foliar.mp4" type="video/mp4">
+                                    <source src="video/video-ice-foliar.mp4" type="video/mp4">
+                                    Tu navegador no soporta reproducción de vídeo HTML5.
+                                </video>
+
+                                <!-- Cartela inferior translúcida con claims del vídeo -->
+                                <div class="absolute bottom-2.5 left-2.5 right-2.5 p-2.5 rounded-xl bg-black/75 backdrop-blur-md border border-white/10 flex items-center justify-between text-[11px] font-mono z-10 pointer-events-none text-white">
+                                    <div class="flex items-center gap-2">
+                                        <span class="w-2 h-2 rounded-full bg-[#FFA928] animate-pulse"></span>
+                                        <span class="font-bold">Penetración & Flujo Citoplásmico</span>
+                                    </div>
+                                    <span class="text-[#FFA928] font-bold text-[10px]">Absorción Inmediata • 0 ATP</span>
+                                </div>
+
+                                <!-- Botón Flotante para Activar/Desactivar Audio -->
+                                <div class="absolute top-2.5 right-2.5 flex items-center gap-1.5 z-20 opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <button type="button" 
+                                            onclick="toggleVideoAudio()" 
+                                            id="btnVideoAudio"
+                                            class="px-2.5 py-1 rounded-lg bg-black/80 hover:bg-[#F59300] hover:text-black text-slate-200 border border-white/20 text-[10px] font-mono font-bold transition-all"
+                                            title="Activar / Desactivar Sonido">
+                                        🔇 Silencio
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Explicación al pie del vídeo -->
+                            <div class="mt-3.5 space-y-2 relative z-10">
+                                <p class="text-xs text-slate-300 font-normal leading-relaxed">
+                                    Observa cómo la microalga unicelular de agua dulce penetra directamente por los estomas vegetales e inicia la transmisión protoplásmica hacia los plasmodesmos sin estrés osmótico.
+                                </p>
+                                <button onclick="showSection('ice-tech')" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-[#F59300] to-[#E07E00] text-black font-tech font-bold text-xs uppercase tracking-wider transition-transform active:scale-95 shadow-md shadow-[#F59300]/25 flex items-center justify-center gap-1.5">
+                                    <span>Aprende más sobre nuestra tecnología exclusiva</span>
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- TRES PILARES INDUSTRIALES -->
+            <div class="py-20 border-t border-bio-border bg-bio-dark/70 relative">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 relative z-10">
+                    <div class="text-center max-w-3xl mx-auto space-y-3">
+                        <span class="text-xs font-mono font-bold tracking-widest text-[#FFA928] uppercase">Capacidad Tecnológica Industrial</span>
+                        <h2 class="font-tech text-3xl sm:text-4xl font-extrabold text-white">Ingeniería para el Reto Agrícola Global</h2>
+                        <p class="text-sm text-slate-300">Soluciones formuladas en nuestra planta de fabricación en España para responder a sequías, salinidad y exigencias de Residuo Cero.</p>
+                    </div>
+
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <!-- Pilar 1 -->
+                        <div class="glass-panel p-8 rounded-3xl space-y-5 border border-bio-border hover:border-[#F59300]/60 transition-all duration-300">
+                            <div class="w-12 h-12 rounded-2xl bg-[#F59300]/10 border border-[#F59300]/30 flex items-center justify-center text-[#FFA928]">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8">
+                                    <circle cx="12" cy="12" r="9" stroke-dasharray="2 2" />
+                                    <circle cx="12" cy="12" r="3.5" />
+                                    <circle cx="8" cy="9" r="1.5" />
+                                    <circle cx="15.5" cy="8.5" r="1.2" />
+                                    <circle cx="15" cy="15" r="1.8" />
+                                    <circle cx="9" cy="15.5" r="1.3" />
+                                </svg>
+                            </div>
+                            <h3 class="font-tech text-xl font-bold text-white">Cultivo de Algas Unicelulares de Agua Dulce</h3>
+                            <p class="text-xs text-slate-300 leading-relaxed">
+                                A diferencia de las soluciones y extractos marinos convencionales que acumulan cloruro sódico, nuestras algas unicelulares de agua dulce eliminan todo riesgo de quemado foliar y fitotoxicidad salina en el bulbo radicular.
+                            </p>
+                            <span class="text-[11px] font-mono text-[#FFA928] block font-semibold">BASE: Ferticell Universal 0-0-1</span>
+                        </div>
+
+                        <!-- Pilar 2 -->
+                        <div class="glass-panel p-8 rounded-3xl space-y-5 border border-bio-border hover:border-bio-cyan/60 transition-all duration-300">
+                            <div class="w-12 h-12 rounded-2xl bg-bio-cyan/10 border border-bio-cyan/30 flex items-center justify-center text-bio-cyan">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8">
+                                    <circle cx="12" cy="12" r="8" />
+                                    <path stroke-linecap="round" d="M12 2v4m0 12v4M2 12h4m12 0h4" />
+                                    <circle cx="12" cy="12" r="2.5" fill="currentColor" />
+                                </svg>
+                            </div>
+                            <h3 class="font-tech text-xl font-bold text-white">Suspensiones Líquidas Ultrafinas</h3>
+                            <p class="text-xs text-slate-300 leading-relaxed">
+                                Formulaciones de alta densidad en Calcio, Magnesio, Fósforo y Zinc con máxima fluidez y solubilidad completa. Asimilación foliar inmediata y total compatibilidad con sistemas de fertirrigación sin obturación de goteros ni filtros.
+                            </p>
+                            <span class="text-[11px] font-mono text-bio-cyan block font-semibold">LÍNEA: Liquid Suspension Series</span>
+                        </div>
+
+                        <!-- Pilar 3 -->
+                        <div class="glass-panel p-8 rounded-3xl space-y-5 border border-bio-border hover:border-bio-accent/60 transition-all duration-300">
+                            <div class="w-12 h-12 rounded-2xl bg-bio-accent/10 border border-bio-accent/30 flex items-center justify-center text-bio-accent">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M7 21V5a2 2 0 012-2h6a2 2 0 012 2v16" />
+                                    <path stroke-linecap="round" d="M12 7v10m-3-6l3-3 3 3m-3 4l3-3" />
+                                </svg>
+                            </div>
+                            <h3 class="font-tech text-xl font-bold text-white">Absorción por Madera (Endoplasma)</h3>
+                            <p class="text-xs text-slate-300 leading-relaxed">
+                                Tecnología pionera de aplicación directa a la corteza del tronco sin perforaciones ni heridas mecánicas. Translocación xilemática activa comprobada en savia en menos de 24 horas.
+                            </p>
+                            <span class="text-[11px] font-mono text-bio-accent block font-semibold">INNOVACIÓN: Ferticell NZn Endoplasma</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ACCESO RÁPIDO AL CATÁLOGO -->
+            <div class="py-16 bg-bio-deep border-t border-bio-border relative">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-8 relative z-10">
+                    <div>
+                        <span class="text-xs font-mono text-[#FFA928] uppercase font-bold">Portafolio Técnico 2026</span>
+                        <h3 class="font-tech text-2xl sm:text-3xl font-bold text-white mt-1">27 Formulaciones Orgánicas Homologadas</h3>
+                        <p class="text-xs text-slate-300 mt-2 max-w-xl">Desde correctores individuales de deficiencia hasta formulados solubles NPK con más del 88% de aminoácidos vegetales.</p>
+                    </div>
+                    <button onclick="showSection('productos')" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-[#F59300] to-[#E07E00] text-black font-tech font-bold text-xs uppercase tracking-wider transition-all hover:scale-105 shrink-0 flex items-center gap-2 shadow-lg shadow-[#F59300]/25">
+                        <span>Ver Catálogo Completo</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- SECCIÓN 2: TECNOLOGÍA I.C.E. (INTER CELLULAR)   -->
+        <!-- ============================================== -->
+        <section id="section-ice-tech" class="view-section hidden py-16 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="space-y-20">
+                <!-- Cabecera de Sección -->
+                <div class="max-w-4xl space-y-4">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F59300]/10 border border-[#F59300]/30 text-[#FFA928] text-xs font-mono font-bold">
+                        <span class="w-2 h-2 rounded-full bg-[#F59300] animate-pulse"></span>
+                        PROPRIETARY BIOTECH ALGORITHM • DOSSIER TÉCNICO OFICIAL
+                    </div>
+                    <h2 class="font-tech text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight">
+                        I.C.E. Technology <br/>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#FFA928] via-bio-accent to-bio-cyan">
+                            Inter Cellular Exchange
+                        </span>
+                    </h2>
+                    <p class="text-base sm:text-lg text-slate-300 font-normal leading-relaxed">
+                        Fórmula tecnológica exclusiva compuesta por <strong>microalgas unicelulares de agua dulce</strong> y bacterias beneficiosas seleccionadas. Células vivas microscópicas que almacenan nutrientes en forma biológica activa, estabilizan auxinas y citoquininas naturales, y penetran con extrema rapidez por los estomas foliares transfiriendo su plasma a las células vegetales agotadas.
+                    </p>
+                    <p class="text-xs sm:text-sm font-mono text-bio-accent font-semibold">
+                        "Trabajar con la naturaleza, no en su contra: máximo rendimiento sin comprometer la sostenibilidad del suelo."
+                    </p>
+                </div>
+
+                <!-- 3 CONDICIONES CIENTÍFICAS DEL SISTEMA I.C.E. -->
+                <div class="space-y-6">
+                    <div class="border-b border-bio-border pb-3 flex items-center justify-between">
+                        <h3 class="font-tech text-2xl font-bold text-white uppercase tracking-wider">
+                            Condiciones Esenciales para la Transmisión Citoplasmática
+                        </h3>
+                        <span class="text-xs font-mono text-[#FFA928] font-bold">[ SYSTEM REQUIREMENTS 01 • 02 • 03 ]</span>
+                    </div>
+
+                    <div class="grid lg:grid-cols-3 gap-8">
+                        <!-- Req 01 -->
+                        <div class="glass-panel p-8 rounded-3xl border border-bio-border hover:border-[#F59300]/40 transition-all space-y-4 relative">
+                            <span class="font-mono text-4xl font-black text-[#FFA928]/30 block">01</span>
+                            <h4 class="font-tech text-xl font-bold text-white">Conexión Funcional: Plasmodesmos</h4>
+                            <p class="text-xs text-slate-300 leading-relaxed font-normal">
+                                Requiere de un sistema de conexión contiguo entre dos células: los <strong>plasmodesmos</strong> (cadenas interconectadas de citoplasma continuo que atraviesan las paredes celulares vegetales).
+                            </p>
+                            <div class="p-3 rounded-xl bg-bio-deep border border-bio-border font-mono text-[11px] text-[#FFA928] font-semibold">
+                                Enlace: Membrana permeable &amp; microcanales celulares
+                            </div>
+                        </div>
+
+                        <!-- Req 02 -->
+                        <div class="glass-panel p-8 rounded-3xl border border-bio-border hover:border-bio-cyan/40 transition-all space-y-4 relative">
+                            <span class="font-mono text-4xl font-black text-bio-cyan/30 block">02</span>
+                            <h4 class="font-tech text-xl font-bold text-white">Medio Diluido Hipoosmótico</h4>
+                            <p class="text-xs text-slate-300 leading-relaxed font-normal">
+                                Un entorno circundante de menor concentración que el interior celular (el espacio intercelular esponjoso de la hoja o la solución de agua dulce edáfica).
+                            </p>
+                            <div class="p-3 rounded-xl bg-bio-deep border border-bio-border font-mono text-[11px] text-bio-cyan font-semibold">
+                                Entorno: Hipoosmótico sin saturación salina
+                            </div>
+                        </div>
+
+                        <!-- Req 03 -->
+                        <div class="glass-panel p-8 rounded-3xl border border-bio-border hover:border-bio-accent/40 transition-all space-y-4 relative">
+                            <span class="font-mono text-4xl font-black text-bio-accent/30 block">03</span>
+                            <h4 class="font-tech text-xl font-bold text-white">Diferencial de Concentración</h4>
+                            <p class="text-xs text-slate-300 leading-relaxed font-normal">
+                                Un gradiente marcado entre la célula Agroplasma I.C.E. (altamente cargada en nutrientes bioactivos) y la célula vegetal receptora (agotada o en fase activa de crecimiento).
+                            </p>
+                            <div class="p-3 rounded-xl bg-bio-deep border border-bio-border font-mono text-[11px] text-bio-accent font-semibold">
+                                Regla: [Solutos Agroplasma] &gt;&gt; [Célula Vegetal]
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-bio-deep border border-bio-border text-xs font-mono text-slate-300">
+                        <strong class="text-white">Nota de Sistema:</strong> El intercambio celular I.C.E. presenta su mayor actividad metabólica en tejidos jóvenes en pleno desarrollo, particularmente en hojas y puntas radiculares.
+                    </div>
+                </div>
+
+                <!-- DOS MECANISMOS DINÁMICOS: FOLIAR Y SUELO -->
+                <div class="grid lg:grid-cols-2 gap-10 items-stretch">
+                    
+                    <!-- DINÁMICA FOLIAR -->
+                    <div class="glass-panel rounded-3xl p-8 border border-bio-border flex flex-col justify-between space-y-6">
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <span class="px-3 py-1 rounded-full bg-[#F59300]/10 border border-[#F59300]/30 text-[#FFA928] text-xs font-mono uppercase font-bold">
+                                    [ SYSTEM PROCESS 01 ]
+                                </span>
+                                <span class="text-xs font-mono text-slate-400 font-semibold">ESTOMAS &amp; MESÓFILO</span>
+                            </div>
+
+                            <h3 class="font-tech text-2xl font-bold text-white">Dinámica de Penetración Foliar</h3>
+
+                            <!-- Imagen de Penetración Foliar con Fallback -->
+                            <div class="relative rounded-2xl overflow-hidden border border-bio-border bg-bio-deep min-h-[200px] flex items-center justify-center group">
+                                <img src="img/ice-foliar-penetration.jpg" 
+                                     alt="Penetración foliar por estomas I.C.E."
+                                     class="w-full h-56 object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                                     onerror="this.onerror=null; this.classList.add('hidden'); document.getElementById('fb-foliar-img').classList.remove('hidden');">
+                                
+                                <div id="fb-foliar-img" class="hidden p-6 text-center space-y-2">
+                                    <div class="w-12 h-12 mx-auto rounded-2xl bg-[#F59300]/10 border border-[#F59300]/30 flex items-center justify-center text-[#FFA928]">
+                                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+                                    </div>
+                                    <span class="font-mono text-xs text-white font-bold block">Esquema 3D: Poro Estomático &amp; Célula Algal</span>
+                                    <span class="text-[10px] font-mono text-slate-400 block">Sube: img/ice-foliar-penetration.jpg</span>
+                                </div>
+                            </div>
+
+                            <ol class="space-y-3 text-xs text-slate-300 font-normal leading-relaxed">
+                                <li class="flex items-start gap-3">
+                                    <span class="w-6 h-6 rounded-full bg-[#F59300]/20 text-[#FFA928] font-mono font-bold flex items-center justify-center shrink-0 text-xs">1</span>
+                                    <span><strong>Dimensión Subestomática Natural:</strong> La célula de microalga de agua dulce Agroplasma es perfectamente compatible con la apertura fisiológica de los estomas foliares.</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <span class="w-6 h-6 rounded-full bg-[#F59300]/20 text-[#FFA928] font-mono font-bold flex items-center justify-center shrink-0 text-xs">2</span>
+                                    <span><strong>Entrada al Mesófilo Esponjoso:</strong> Tras la pulverización, penetra directamente a las capas esponjosas internas (zonas con aire y solución diluida).</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <span class="w-6 h-6 rounded-full bg-[#F59300]/20 text-[#FFA928] font-mono font-bold flex items-center justify-center shrink-0 text-xs">3</span>
+                                    <span><strong>Transferencia de Presión:</strong> Inicia el fenómeno de transmisión protoplásmica instantánea hacia los haces vasculares del xilema y floema.</span>
+                                </li>
+                            </ol>
+                        </div>
+                        <div class="pt-4 border-t border-bio-border text-[11px] font-mono text-[#FFA928] font-bold">
+                            Resultado: 90% asimilado foliarmente en menos de 3 horas.
+                        </div>
+                    </div>
+
+                    <!-- DESBLOQUEO EN SUELO -->
+                    <div class="glass-panel rounded-3xl p-8 border border-bio-border flex flex-col justify-between space-y-6">
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <span class="px-3 py-1 rounded-full bg-bio-accent/10 border border-bio-accent/30 text-bio-accent text-xs font-mono uppercase font-bold">
+                                    [ SYSTEM PROCESS 02 ]
+                                </span>
+                                <span class="text-xs font-mono text-slate-400 font-semibold">RIZOSFERA &amp; SUELO</span>
+                            </div>
+
+                            <h3 class="font-tech text-2xl font-bold text-white">Transferencia en Suelo &amp; Desbloqueo Mineral</h3>
+
+                            <!-- Imagen de Raíz y Suelo con Fallback -->
+                            <div class="relative rounded-2xl overflow-hidden border border-bio-border bg-bio-deep min-h-[200px] flex items-center justify-center group">
+                                <img src="img/ice-soil-roots-unlock.jpg" 
+                                     alt="Desbloqueo de nutrientes en suelo y raíz I.C.E."
+                                     class="w-full h-56 object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                                     onerror="this.onerror=null; this.classList.add('hidden'); document.getElementById('fb-soil-img').classList.remove('hidden');">
+                                
+                                <div id="fb-soil-img" class="hidden p-6 text-center space-y-2">
+                                    <div class="w-12 h-12 mx-auto rounded-2xl bg-bio-accent/10 border border-bio-accent/30 flex items-center justify-center text-bio-accent">
+                                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                                    </div>
+                                    <span class="font-mono text-xs text-white font-bold block">Esquema: Desbloqueo de Fósforo y Calcio en Rizosfera</span>
+                                    <span class="text-[10px] font-mono text-slate-400 block">Sube: img/ice-soil-roots-unlock.jpg</span>
+                                </div>
+                            </div>
+
+                            <div class="space-y-3 text-xs text-slate-300 font-normal leading-relaxed">
+                                <p>
+                                    Las células Agroplasma I.C.E. aplicadas al suelo <strong>desbloquean activamente fertilizantes y minerales previamente fijados</strong> en el horizonte mineral (topsoil/subsoil).
+                                </p>
+                                <p>
+                                    El proceso crea una difusión de agua desde la célula radicular hacia la célula Agroplasma. La célula algal, cargada de nutrientes, transporta el material citoplasmático en <strong>flujo en masa (mass flow)</strong> continuo hacia la planta.
+                                </p>
+                                <p>
+                                    Al alcanzar el equilibrio, el flujo cesa: la envoltura celular biodegradable se disuelve de forma natural liberando sus oligoelementos que son absorbidos por transporte activo celular.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="pt-4 border-t border-bio-border text-[11px] font-mono text-bio-accent font-bold">
+                            Residuo: 0% salino • Aumento de la eficiencia del abonado previo en suelo.
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- DIAGRAMA LINEAL DE FLUJO CITOPLÁSMICO -->
+                <div class="glass-panel p-8 sm:p-10 rounded-3xl border border-bio-border space-y-8">
+                    <div class="text-center max-w-2xl mx-auto space-y-2">
+                        <span class="text-xs font-mono text-bio-cyan font-bold uppercase tracking-widest">[ LINEAR USER-FLOW ]</span>
+                        <h3 class="font-tech text-2xl sm:text-3xl font-extrabold text-white">
+                            Corriente Citoplasmática: La Búsqueda del Equilibrio Homeostático
+                        </h3>
+                        <p class="text-xs text-slate-300">
+                            Regla biológica: Los nutrientes siempre fluirán desde zonas de alta concentración hacia zonas de baja concentración hasta alcanzar el balance fisiológico.
+                        </p>
+                    </div>
+
+                    <!-- 4 Pasos del Flujo -->
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 relative">
+                        <div class="p-5 rounded-2xl bg-bio-deep border border-[#F59300]/30 space-y-2">
+                            <span class="font-mono text-[10px] text-[#FFA928] font-bold">PASO 01 • DONANTE</span>
+                            <h5 class="font-tech text-base font-bold text-white">Células Agroplasma I.C.E.</h5>
+                            <p class="text-[11px] text-slate-300 font-normal">Concentración celular densa en algas vivas de agua dulce, auxinas, citoquininas y minerales quelatados biológicamente.</p>
+                        </div>
+
+                        <div class="p-5 rounded-2xl bg-bio-deep border border-bio-cyan/30 space-y-2">
+                            <span class="font-mono text-[10px] text-bio-cyan font-bold">PASO 02 • CANAL</span>
+                            <h5 class="font-tech text-base font-bold text-white">Plasmodesmos</h5>
+                            <p class="text-[11px] text-slate-300 font-normal">Puentes intercelulares continuos que permiten el paso directo de macromoléculas y solutos sin gasto de ATP.</p>
+                        </div>
+
+                        <div class="p-5 rounded-2xl bg-bio-deep border border-bio-accent/30 space-y-2">
+                            <span class="font-mono text-[10px] text-bio-accent font-bold">PASO 03 • RECEPTOR</span>
+                            <h5 class="font-tech text-base font-bold text-white">Células Vegetales</h5>
+                            <p class="text-[11px] text-slate-300 font-normal">Células foliares o de raíz de menor concentración que reciben el plasma enriquecido instantáneamente.</p>
+                        </div>
+
+                        <div class="p-5 rounded-2xl bg-bio-deep border border-emerald-400/30 space-y-2">
+                            <span class="font-mono text-[10px] text-emerald-400 font-bold">PASO 04 • EXPEDICIÓN</span>
+                            <h5 class="font-tech text-base font-bold text-white">Distribución en Planta</h5>
+                            <p class="text-[11px] text-slate-300 font-normal">Translocación rápida a órganos de reserva, brotación, cuajado, engorde y regeneración celular inmediata.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MATRIZ DE COMPATIBILIDAD CON CULTIVOS -->
+                <div class="space-y-6">
+                    <div class="border-b border-bio-border pb-3 flex flex-wrap items-center justify-between gap-2">
+                        <h3 class="font-tech text-2xl font-bold text-white uppercase tracking-wider">
+                            Matriz de Compatibilidad con Cultivos
+                        </h3>
+                        <span class="text-xs font-mono text-bio-accent font-bold">[ CROP COMPATIBILITY MATRIX ]</span>
+                    </div>
+
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="glass-panel p-6 rounded-2xl border border-bio-border space-y-2">
+                            <span class="text-[#FFA928] font-mono text-xs font-bold block">01 • SOLANÁCEAS</span>
+                            <h5 class="font-tech text-sm font-bold text-white">Patata, Tomate, Berenjena, Pimiento</h5>
+                            <p class="text-xs text-slate-300 leading-relaxed font-normal">Mejora contundente de la calidad de piel y firmeza del fruto, vigor frente a hongos y resistencia a picos de estrés térmico durante la floración.</p>
+                        </div>
+                        <div class="glass-panel p-6 rounded-2xl border border-bio-border space-y-2">
+                            <span class="text-bio-accent font-mono text-xs font-bold block">02 • CUCURBITÁCEAS</span>
+                            <h5 class="font-tech text-sm font-bold text-white">Sandía, Melón, Calabacín, Pepino</h5>
+                            <p class="text-xs text-slate-300 leading-relaxed font-normal">Incremento de rendimiento y producción, maduración altamente homogénea, mayor concentración de grados Brix (azúcares) y textura óptima.</p>
+                        </div>
+                        <div class="glass-panel p-6 rounded-2xl border border-bio-border space-y-2">
+                            <span class="text-bio-cyan font-mono text-xs font-bold block">03 • FRUTALES TROPICALES</span>
+                            <h5 class="font-tech text-sm font-bold text-white">Aguacate, Mango, Chirimoya, Papaya</h5>
+                            <p class="text-xs text-slate-300 leading-relaxed font-normal">Estimula el crecimiento vegetativo vigoroso, previene el aborto prematuro del fruto y eleva la resistencia ante vientos secos y golpes de calor.</p>
+                        </div>
+                        <div class="glass-panel p-6 rounded-2xl border border-bio-border space-y-2">
+                            <span class="text-[#FFA928] font-mono text-xs font-bold block">04 • FRUTALES TEMPLADOS</span>
+                            <h5 class="font-tech text-sm font-bold text-white">Olivo, Almendro, Manzano, Peral, Nogal</h5>
+                            <p class="text-xs text-slate-300 leading-relaxed font-normal">Favorece calibres uniformes y consistentes, minimiza el estrés de cuajado, y eleva el rendimiento graso y postcosecha en frutos de hueso y pepita.</p>
+                        </div>
+                        <div class="glass-panel p-6 rounded-2xl border border-bio-border space-y-2">
+                            <span class="text-bio-accent font-mono text-xs font-bold block">05 • LEGUMINOSAS &amp; EXTENSIVOS</span>
+                            <h5 class="font-tech text-sm font-bold text-white">Soja, Maíz, Cereales, Alfalfa, Aromáticas</h5>
+                            <p class="text-xs text-slate-300 leading-relaxed font-normal">Aumenta el índice de clorofila y la fijación biológica de nódulos radiculares con un incremento directo de biomasa y resistencia a sequía.</p>
+                        </div>
+                        <div class="glass-panel p-6 rounded-2xl border border-bio-border space-y-2">
+                            <span class="text-bio-cyan font-mono text-xs font-bold block">06 • FLORICULTURA &amp; HUERTO</span>
+                            <h5 class="font-tech text-sm font-bold text-white">Flor cortada, Viveros, Plantas de interior</h5>
+                            <p class="text-xs text-slate-300 leading-relaxed font-normal">Supervivencia superior en trasplantes, coloración viva de pétalos, engrosamiento de tallos y resistencia frente a plagas comunes sin toxicidad.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MODOS DE EMPLEO / DEPLOYMENT MODES -->
+                <div class="space-y-6">
+                    <div class="border-b border-bio-border pb-3 flex items-center justify-between">
+                        <h3 class="font-tech text-2xl font-bold text-white uppercase tracking-wider">
+                            Modos de Aplicación y Despliegue en Campo
+                        </h3>
+                        <span class="text-xs font-mono text-[#FFA928] font-bold">[ DEPLOYMENT MODES ]</span>
+                    </div>
+
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div class="glass-panel rounded-3xl overflow-hidden border border-bio-border flex flex-col justify-between">
+                            <div class="relative bg-bio-deep min-h-[160px] flex items-center justify-center">
+                                <img src="img/app-flood-irrigation.jpg" 
+                                     alt="Riego por inundación I.C.E."
+                                     class="w-full h-44 object-cover"
+                                     onerror="this.onerror=null; this.classList.add('hidden'); document.getElementById('fb-flood').classList.remove('hidden');">
+                                <div id="fb-flood" class="hidden p-4 text-center font-mono text-xs text-slate-400">
+                                    <span class="text-[#FFA928] block font-bold">Riego a Manta / Inundación</span>
+                                    <span>Sube: img/app-flood-irrigation.jpg</span>
+                                </div>
+                            </div>
+                            <div class="p-6 space-y-2">
+                                <h4 class="font-tech text-lg font-bold text-white">Riego por Inundación</h4>
+                                <p class="text-xs text-slate-300 leading-relaxed font-normal">
+                                    Distribuye el producto I.C.E. de forma homogénea en todo el perfil de suelo alcanzando las raíces más profundas sin riesgo de fitotoxicidad.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="glass-panel rounded-3xl overflow-hidden border border-bio-border flex flex-col justify-between">
+                            <div class="relative bg-bio-deep min-h-[160px] flex items-center justify-center">
+                                <img src="img/app-drip-irrigation.jpg" 
+                                     alt="Riego por goteo localizado I.C.E."
+                                     class="w-full h-44 object-cover"
+                                     onerror="this.onerror=null; this.classList.add('hidden'); document.getElementById('fb-drip').classList.remove('hidden');">
+                                <div id="fb-drip" class="hidden p-4 text-center font-mono text-xs text-slate-400">
+                                    <span class="text-bio-cyan block font-bold">Riego por Goteo Localizado</span>
+                                    <span>Sube: img/app-drip-irrigation.jpg</span>
+                                </div>
+                            </div>
+                            <div class="p-6 space-y-2">
+                                <div class="flex items-center justify-between">
+                                    <h4 class="font-tech text-lg font-bold text-white">Riego por Goteo</h4>
+                                    <span class="text-[10px] font-mono text-bio-cyan px-2 py-0.5 rounded bg-bio-cyan/10 font-bold border border-bio-cyan/30">Eficiencia Hídrica</span>
+                                </div>
+                                <p class="text-xs text-slate-300 leading-relaxed font-normal">
+                                    100% soluble en agua. No genera sedimentos ni obtura goteros ni filtros. Maximiza la absorción en el bulbo húmedo y aprovecha cada gota de agua.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="glass-panel rounded-3xl overflow-hidden border border-bio-border flex flex-col justify-between">
+                            <div class="relative bg-bio-deep min-h-[160px] flex items-center justify-center">
+                                <img src="img/app-foliar-spray.jpg" 
+                                     alt="Pulverización foliar I.C.E."
+                                     class="w-full h-44 object-cover"
+                                     onerror="this.onerror=null; this.classList.add('hidden'); document.getElementById('fb-foliar').classList.remove('hidden');">
+                                <div id="fb-foliar" class="hidden p-4 text-center font-mono text-xs text-slate-400">
+                                    <span class="text-bio-accent block font-bold">Pulverización Foliar</span>
+                                    <span>Sube: img/app-foliar-spray.jpg</span>
+                                </div>
+                            </div>
+                            <div class="p-6 space-y-2">
+                                <div class="flex items-center justify-between">
+                                    <h4 class="font-tech text-lg font-bold text-white">Aplicación Foliar</h4>
+                                    <span class="text-[10px] font-mono text-bio-accent px-2 py-0.5 rounded bg-bio-accent/10 font-bold border border-bio-accent/30">Respuesta Rápida</span>
+                                </div>
+                                <p class="text-xs text-slate-300 leading-relaxed font-normal">
+                                    Respuesta inmediata frente a estrés térmico o carencias agudas. Penetra la cutícula y los estomas sin quemado foliar ni residuos químicos.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CALLOUT BANNER UNIVERSAL 0-0-1 -->
+                <div class="p-8 sm:p-10 rounded-3xl bg-bio-deep text-white border border-[#F59300]/40 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl">
+                    <div class="space-y-1">
+                        <span class="text-[10px] font-mono text-[#FFA928] uppercase font-bold tracking-widest">PRODUCTO EMBLEMA I.C.E.</span>
+                        <h4 class="font-tech text-2xl font-bold text-white">UNIVERSAL 0-0-1 Liquid Biostimulant</h4>
+                        <p class="text-xs text-slate-300 max-w-xl font-normal leading-relaxed">
+                            Disponible en envases de <strong>1 Litro</strong>, garrafas de <strong>10 Litros</strong> y contenedores <strong>IBC de 1000 Litros</strong>. Homologado bajo ECOCERT (UE) 848/2018, USDA-NOP y JAS.
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-3 shrink-0">
+                        <button onclick="openProductModal('universal')" class="px-5 py-3 rounded-xl bg-[#F59300] hover:bg-[#FFA928] text-black font-tech font-bold text-xs uppercase tracking-wider transition-colors shadow-md">
+                            Ver Ficha Universal →
+                        </button>
+                        <button onclick="showSection('contacto'); document.getElementById('formProducts').value = 'Tecnología I.C.E. / Universal 0-0-1';" class="px-5 py-3 rounded-xl bg-bio-surface hover:bg-bio-accent hover:text-bio-deep text-white border border-bio-border font-tech font-bold text-xs uppercase tracking-wider transition-colors">
+                            Solicitar Muestra B2B
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- SECCIÓN 3: PRODUCTOS (CATÁLOGO TÉCNICO)        -->
+        <!-- ============================================== -->
+        <section id="section-productos" class="view-section hidden py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="space-y-10">
+                
+                <!-- Cabecera de Catálogo y Buscador -->
+                <div class="text-center max-w-3xl mx-auto space-y-3">
+                    <span class="text-xs font-mono font-bold tracking-widest text-bio-accent uppercase">Portafolio Nutricional & Bioprotección 2026</span>
+                    <h2 class="font-tech text-3xl sm:text-4xl font-extrabold text-white">Catálogo Oficial de Productos Ferticell®</h2>
+                    <p class="text-xs sm:text-sm text-slate-300">
+                        Filtre por familia biotecnológica o busque por elemento (ej. Nitrógeno, Calcio, Boro, Potasio, Algas) para acceder a especificaciones y formatos.
+                    </p>
+
+                    <!-- Input de Búsqueda -->
+                    <div class="pt-4 max-w-xl mx-auto relative">
+                        <input type="text" id="searchProductInput" placeholder="Buscar por nombre, nutriente (ej. Nitrógeno, Calcio, K₂O, Algas)..." 
+                               class="w-full px-5 py-3.5 rounded-2xl bg-bio-surface border border-bio-border text-slate-100 placeholder-slate-400 text-xs sm:text-sm focus:outline-none focus:border-bio-accent focus:ring-1 focus:ring-bio-accent shadow-sm transition-all">
+                        <svg class="w-5 h-5 text-slate-400 absolute right-4 top-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                    </div>
+                </div>
+
+                <!-- Pestañas de Filtro -->
+                <div class="flex flex-wrap items-center justify-center gap-2" id="catalogFiltersContainer">
+                    <button data-cat="all" class="cat-filter active px-3.5 py-2 rounded-xl text-xs font-mono font-bold transition-all bg-bio-accent text-bio-deep shadow-sm">Todos (27)</button>
+                    <button data-cat="biostimulants" class="cat-filter px-3.5 py-2 rounded-xl text-xs font-mono font-bold transition-all bg-bio-surface text-slate-300 border border-bio-border hover:border-bio-accent">Bioestimulantes</button>
+                    <button data-cat="nitrogen" class="cat-filter px-3.5 py-2 rounded-xl text-xs font-mono font-bold transition-all bg-bio-surface text-slate-300 border border-bio-border hover:border-bio-accent">Nitrógeno Orgánico</button>
+                    <button data-cat="pk" class="cat-filter px-3.5 py-2 rounded-xl text-xs font-mono font-bold transition-all bg-bio-surface text-slate-300 border border-bio-border hover:border-bio-accent">Fósforo & Potasio</button>
+                    <button data-cat="suspension" class="cat-filter px-3.5 py-2 rounded-xl text-xs font-mono font-bold transition-all bg-bio-surface text-slate-300 border border-bio-border hover:border-bio-accent">Suspensiones Líquidas</button>
+                    <button data-cat="micro" class="cat-filter px-3.5 py-2 rounded-xl text-xs font-mono font-bold transition-all bg-bio-surface text-slate-300 border border-bio-border hover:border-bio-accent">Micronutrientes</button>
+                    <button data-cat="humic" class="cat-filter px-3.5 py-2 rounded-xl text-xs font-mono font-bold transition-all bg-bio-surface text-slate-300 border border-bio-border hover:border-bio-accent">Húmicos & Fúlvicos</button>
+                    <button data-cat="npk" class="cat-filter px-3.5 py-2 rounded-xl text-xs font-mono font-bold transition-all bg-bio-surface text-slate-300 border border-bio-border hover:border-bio-accent">NPK Ecológicos</button>
+                    <button data-cat="special" class="cat-filter px-3.5 py-2 rounded-xl text-xs font-mono font-bold transition-all bg-bio-surface text-slate-300 border border-bio-border hover:border-bio-accent">Endoplasma (Tronco)</button>
+                    <button data-cat="home" class="cat-filter px-3.5 py-2 rounded-xl text-xs font-mono font-bold transition-all bg-bio-surface text-slate-300 border border-bio-border hover:border-bio-accent">Home & Garden</button>
+                </div>
+
+                <!-- Grid de Tarjetas de Productos -->
+                <div id="productCardsGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Renderizado dinámico vía JavaScript -->
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- SECCIÓN 4: QUIÉNES SOMOS (FÁBRICA & I+D)       -->
+        <!-- ============================================== -->
+        <section id="section-nosotros" class="view-section hidden py-16 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="space-y-16">
+                <!-- Cabecera -->
+                <div class="max-w-4xl space-y-5">
+                    <span class="text-xs font-mono font-bold tracking-widest text-[#FFA928] uppercase">Trayectoria &amp; Liderazgo Biotecnológico Desde 1983</span>
+                    <h2 class="font-tech text-4xl sm:text-5xl font-extrabold text-white leading-tight">
+                        Fabricación Española de Vanguardia, <br/>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-bio-accent via-emerald-400 to-[#FFA928]">
+                            Soluciones Agrícolas de Precisión
+                        </span>
+                    </h2>
+                    <div class="space-y-4 text-sm sm:text-base text-slate-300 leading-relaxed font-normal">
+                        <p>
+                            Fundada a principios de <strong class="text-white font-semibold">1983</strong>, <strong class="text-white font-semibold">Agroplasma España</strong> opera una avanzada planta de fabricación y laboratorios propios especializados en soluciones agrícolas de alto rendimiento. Nuestra experiencia central abarca el <strong class="text-bio-accent font-semibold">cultivo puro de algas unicelulares y bacterias beneficiosas</strong>, procesos de extracción botánica de alta precisión y el desarrollo continuo de formulaciones orgánicas innovadoras, así como suplementos nutricionales líquidos de base algal.
+                        </p>
+                        <p>
+                            A la vanguardia de nuestros avances científicos se encuentra la tecnología patentada y exclusiva <strong class="text-[#FFA928] font-mono font-bold">I.C.E. (Inter Cellular Exchange)</strong>. Este proceso disruptivo facilita la transferencia directa y altamente eficiente de nutrientes desde las células microbianas y algales donantes hacia las células vegetales, estimulando sustancialmente el desarrollo vegetativo y multiplicando la capacidad del cultivo para asimilar nutrientes clave del suelo con un <strong class="text-white font-semibold">gasto energético metabólico prácticamente nulo</strong>.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Capacidad Industrial -->
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="glass-panel p-8 rounded-3xl border border-bio-border space-y-4">
+                        <div class="w-10 h-10 rounded-xl bg-bio-accent/10 border border-bio-accent/30 flex items-center justify-center text-bio-accent">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 3h6m-4 0v5.2a4 4 0 01-1.2 2.8L5.5 15.6A4 4 0 004 18.8V19a2 2 0 002 2h12a2 2 0 002-2v-.2a4 4 0 00-1.5-3.2l-4.3-4.6A4 4 0 0113 8.2V3" />
+                                <path stroke-linecap="round" d="M7 16h10" />
+                            </svg>
+                        </div>
+                        <h3 class="font-tech text-xl font-bold text-white">Laboratorio Propio &amp; Reactores</h3>
+                        <p class="text-xs text-slate-300 leading-relaxed font-normal">
+                            Control absoluto de la cadena de valor: cepario propio, reactores de cultivo estéril de microalgas de agua dulce, líneas de hidrólisis enzimática y formulación avanzada de suspensiones de alta pureza.
+                        </p>
+                    </div>
+
+                    <div class="glass-panel p-8 rounded-3xl border border-bio-border space-y-4">
+                        <div class="w-10 h-10 rounded-xl bg-[#F59300]/10 border border-[#F59300]/30 flex items-center justify-center text-[#FFA928]">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                            </svg>
+                        </div>
+                        <h3 class="font-tech text-xl font-bold text-white">Private Label / Marca Propia</h3>
+                        <p class="text-xs text-slate-300 leading-relaxed font-normal">
+                            Formulamos a medida para grandes importadores y casas comerciales bajo sus propias marcas, asegurando el cumplimiento de los registros fitosanitarios y certificaciones ecológicas mundiales.
+                        </p>
+                    </div>
+
+                    <div class="glass-panel p-8 rounded-3xl border border-bio-border space-y-4">
+                        <div class="w-10 h-10 rounded-xl bg-bio-cyan/10 border border-bio-cyan/30 flex items-center justify-center text-bio-cyan">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8">
+                                <circle cx="12" cy="12" r="9" />
+                                <path stroke-linecap="round" d="M3.6 9h16.8M3.6 15h16.8" />
+                                <path stroke-linecap="round" d="M12 3a14.5 14.5 0 000 18 14.5 14.5 0 000-18z" />
+                            </svg>
+                        </div>
+                        <h3 class="font-tech text-xl font-bold text-white">Presencia en +25 Países</h3>
+                        <p class="text-xs text-slate-300 leading-relaxed font-normal">
+                            Nuestra gama Ferticell® se comercializa y cuenta con registros oficiales en EE.UU., México, España, Grecia, Turquía, Sudamérica, Sudeste Asiático y Norte de África.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Bloque de Certificaciones -->
+                <div class="glass-panel rounded-3xl p-8 border border-bio-border space-y-6">
+                    <h3 class="font-tech text-2xl font-bold text-white">Certificaciones de Calidad y Registro</h3>
+                    <div class="grid sm:grid-cols-3 gap-6 text-xs">
+                        <div class="p-4 rounded-2xl bg-bio-deep border border-bio-border space-y-1.5">
+                            <span class="font-mono text-bio-accent font-bold block">ECOCERT (UE)</span>
+                            <p class="text-slate-300">Conforme a los Reglamentos (UE) nº 848/2018 y 1165/2021 para insumos utilizables en agricultura ecológica.</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-bio-deep border border-bio-border space-y-1.5">
+                            <span class="font-mono text-bio-cyan font-bold block">USDA-NOP</span>
+                            <p class="text-slate-300">Aprobado por el Programa Nacional Orgánico de los Estados Unidos para comercialización en América del Norte.</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-bio-deep border border-bio-border space-y-1.5">
+                            <span class="font-mono text-emerald-400 font-bold block">JAS JAPÓN</span>
+                            <p class="text-slate-300">Estándar Agrícola Japonés para insumos orgánicos, de los más exigentes del mundo en metales pesados.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- SECCIÓN 5: BLOG / ENSAYOS TÉCNICOS AGRONÓMICOS -->
+        <!-- ============================================== -->
+        <section id="section-blog" class="view-section hidden py-16 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="space-y-12">
+                <div class="max-w-3xl space-y-3">
+                    <span class="text-xs font-mono font-bold tracking-widest text-bio-accent uppercase">I+D Aplicado y Ensayos de Campo</span>
+                    <h2 class="font-tech text-3xl sm:text-4xl font-extrabold text-white">Artículos Técnicos & Ensayos Agronómicos</h2>
+                    <p class="text-xs sm:text-sm text-slate-300">
+                        Resultados científicos, respuestas a estrés abiótico y protocolos de aplicación documentados en cultivos de alto rendimiento.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Artículo 1 -->
+                    <article class="glass-panel rounded-3xl overflow-hidden border border-bio-border flex flex-col justify-between hover:border-bio-accent transition-all">
+                        <div class="p-7 space-y-3">
+                            <div class="flex items-center justify-between text-[11px] font-mono text-bio-accent font-bold">
+                                <span>ENSAYO DE CAMPO</span>
+                                <span>OCT 2026</span>
+                            </div>
+                            <h3 class="font-tech text-lg font-bold text-white hover:text-bio-accent transition-colors">
+                                Eficiencia de Ferticell Universal 0-0-1 frente al estrés hídrico extremo en olivar y vid
+                            </h3>
+                            <p class="text-xs text-slate-300 leading-relaxed font-normal">
+                                Estudio comparativo de conductancia estomática y mantenimiento de turgencia celular bajo temperaturas superiores a 38 °C durante el cuajado.
+                            </p>
+                        </div>
+                        <div class="p-7 pt-0 border-t border-bio-border/60 mt-4 flex items-center justify-between">
+                            <span class="text-[11px] font-mono text-slate-400">Cultivos: Olivar / Vid</span>
+                            <button onclick="openProductModal('universal')" class="text-xs font-mono font-bold text-bio-accent hover:underline">Ver Solución →</button>
+                        </div>
+                    </article>
+
+                    <!-- Artículo 2 -->
+                    <article class="glass-panel rounded-3xl overflow-hidden border border-bio-border flex flex-col justify-between hover:border-bio-accent transition-all">
+                        <div class="p-7 space-y-3">
+                            <div class="flex items-center justify-between text-[11px] font-mono text-bio-cyan font-bold">
+                                <span>BIOTECNOLOGÍA FOLIAR</span>
+                                <span>AGO 2026</span>
+                            </div>
+                            <h3 class="font-tech text-lg font-bold text-white hover:text-bio-accent transition-colors">
+                                Corrección de Clorosis Férrica con Hierro (II) y microalgas unicelulares
+                            </h3>
+                            <p class="text-xs text-slate-300 leading-relaxed font-normal">
+                                Por qué el ion Fe²⁺ bio-complejado con soluciones de algas de agua dulce presenta 3 veces mayor tasa de translocación que los quelatos sintéticos EDDHA en suelos calizos.
+                            </p>
+                        </div>
+                        <div class="p-7 pt-0 border-t border-bio-border/60 mt-4 flex items-center justify-between">
+                            <span class="text-[11px] font-mono text-slate-400">Nutriente: FeO 8.38%</span>
+                            <button onclick="openProductModal('microiron')" class="text-xs font-mono font-bold text-bio-accent hover:underline">Ver Solución →</button>
+                        </div>
+                    </article>
+
+                    <!-- Artículo 3 -->
+                    <article class="glass-panel rounded-3xl overflow-hidden border border-bio-border flex flex-col justify-between hover:border-bio-accent transition-all">
+                        <div class="p-7 space-y-3">
+                            <div class="flex items-center justify-between text-[11px] font-mono text-[#FFA928] font-bold">
+                                <span>INNOVACIÓN MADERA</span>
+                                <span>JUN 2026</span>
+                            </div>
+                            <h3 class="font-tech text-lg font-bold text-white hover:text-bio-accent transition-colors">
+                                Endoplasma I.C.E.: Modificación de ºBrix en savia xilemática en 24 horas vía corteza
+                            </h3>
+                            <p class="text-xs text-slate-300 leading-relaxed font-normal">
+                                Aplicación de Nitrógeno y Zinc directo al tronco de frutales de hueso en parada invernal y brotación: reactivación sin heridas mecánicas.
+                            </p>
+                        </div>
+                        <div class="p-7 pt-0 border-t border-bio-border/60 mt-4 flex items-center justify-between">
+                            <span class="text-[11px] font-mono text-slate-400">Producto: NZn I.C.E.</span>
+                            <button onclick="openProductModal('nznice')" class="text-xs font-mono font-bold text-bio-accent hover:underline">Ver Solución →</button>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- SECCIÓN 6: CONTACTO B2B / DISTRIBUCIÓN         -->
+        <!-- ============================================== -->
+        <section id="section-contacto" class="view-section hidden py-16 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-12 gap-12 items-start">
+                
+                <div class="lg:col-span-5 space-y-8">
+                    <div class="space-y-3">
+                        <span class="text-xs font-mono font-bold tracking-widest text-[#FFA928] uppercase">Departamento de Exportación & Técnico</span>
+                        <h2 class="font-tech text-3xl sm:text-4xl font-extrabold text-white">Conecte con Nuestra Central de Fabricación</h2>
+                        <p class="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
+                            Atendemos consultas de distribución internacional, grandes productores agrícolas, formuladores a granel y proyectos de Marca Privada (Private Label).
+                        </p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="glass-panel p-5 rounded-2xl border border-bio-border flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-xl bg-bio-accent/10 border border-bio-accent/30 flex items-center justify-center text-bio-accent shrink-0">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                    <circle cx="12" cy="11" r="2.5" />
+                                </svg>
+                            </div>
+                            <div>
+                                <span class="font-tech font-bold text-sm text-white block">Sede & Fábrica Agroplasma SL</span>
+                                <p class="text-xs text-slate-300 mt-0.5">C. Torre del Mar, 56, Polígono Industrial Santa Teresa, 29004 Málaga, España.</p>
+                            </div>
+                        </div>
+
+                        <div class="glass-panel p-5 rounded-2xl border border-bio-border flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-xl bg-bio-cyan/10 border border-bio-cyan/30 flex items-center justify-center text-bio-cyan shrink-0">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <span class="font-tech font-bold text-sm text-white block">Atención Comercial & Exportación</span>
+                                <p class="text-xs text-slate-300 mt-0.5">+34 951 769 790</p>
+                                <p class="text-xs text-slate-300">info@agroplasma.com</p>
+                            </div>
+                        </div>
+
+                        <div class="glass-panel p-5 rounded-2xl border border-bio-border flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-xl bg-amberBio-500/10 border border-[#F59300]/30 flex items-center justify-center text-[#FFA928] shrink-0">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8">
+                                    <circle cx="12" cy="12" r="9" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 7v5l3 3" />
+                                </svg>
+                            </div>
+                            <div>
+                                <span class="font-tech font-bold text-sm text-white block">Tiempo Medio de Respuesta</span>
+                                <p class="text-xs text-slate-300 mt-0.5">Menos de 48 horas laborables con asignación de un gerente de cuentas dedicado.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Formulario B2B -->
+                <div class="lg:col-span-7">
+                    <div class="glass-panel rounded-3xl p-8 sm:p-10 border border-bio-border shadow-2xl space-y-6">
+                        <h3 class="font-tech text-2xl font-bold text-white">Solicitud de Distribución / Consulta Técnica</h3>
+                        
+                        <form id="leadContactForm" onsubmit="handleContactSubmit(event)" class="space-y-5">
+                            <div>
+                                <label class="block text-xs font-mono text-slate-300 font-bold mb-1.5">Perfil de su Empresa *</label>
+                                <select required id="formProfile" class="w-full px-4 py-3 rounded-xl bg-bio-surface border border-bio-border text-slate-100 text-xs focus:outline-none focus:border-bio-accent">
+                                    <option value="distributor" class="bg-bio-deep">Distribuidor / Importador de Insumos Agrícolas</option>
+                                    <option value="privatelabel" class="bg-bio-deep">Fabricante en busca de Formulación Private Label</option>
+                                    <option value="farm" class="bg-bio-deep">Gran Explotación Agrícola / Empresa Productora</option>
+                                    <option value="tech" class="bg-bio-deep">Técnico Agrónomo / Universidad / Centro de I+D</option>
+                                </select>
+                            </div>
+
+                            <div class="grid sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-mono text-slate-300 font-bold mb-1.5">Nombre Completo *</label>
+                                    <input type="text" required id="formName" placeholder="Ej. Dr. Carlos Mendoza" 
+                                           class="w-full px-4 py-3 rounded-xl bg-bio-surface border border-bio-border text-slate-100 placeholder-slate-500 text-xs focus:outline-none focus:border-bio-accent">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-mono text-slate-300 font-bold mb-1.5">Correo Corporativo *</label>
+                                    <input type="email" required id="formEmail" placeholder="carlos@empresa.com" 
+                                           class="w-full px-4 py-3 rounded-xl bg-bio-surface border border-bio-border text-slate-100 placeholder-slate-500 text-xs focus:outline-none focus:border-bio-accent">
+                                </div>
+                            </div>
+
+                            <div class="grid sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-mono text-slate-300 font-bold mb-1.5">Teléfono / WhatsApp *</label>
+                                    <div class="flex gap-1.5 items-center">
+                                        <select id="formCountryCode" class="w-24 px-1.5 py-3 rounded-xl bg-bio-surface border border-bio-border text-slate-100 text-[11px] font-mono focus:outline-none focus:border-bio-accent shrink-0 cursor-pointer text-center">
+                                            <option value="+34" selected class="bg-bio-deep">🇪🇸 +34</option>
+                                            <option value="+1" class="bg-bio-deep">🇺🇸 +1</option>
+                                            <option value="+52" class="bg-bio-deep">🇲🇽 +52</option>
+                                            <option value="+54" class="bg-bio-deep">🇦🇷 +54</option>
+                                            <option value="+56" class="bg-bio-deep">🇨🇱 +56</option>
+                                            <option value="+57" class="bg-bio-deep">🇨🇴 +57</option>
+                                            <option value="+51" class="bg-bio-deep">🇵🇪 +51</option>
+                                            <option value="+33" class="bg-bio-deep">🇫🇷 +33</option>
+                                            <option value="+39" class="bg-bio-deep">🇮🇹 +39</option>
+                                            <option value="+49" class="bg-bio-deep">🇩🇪 +49</option>
+                                            <option value="+30" class="bg-bio-deep">🇬🇷 +30</option>
+                                            <option value="+90" class="bg-bio-deep">🇹🇷 +90</option>
+                                            <option value="+212" class="bg-bio-deep">🇲🇦 +212</option>
+                                        </select>
+                                        <input type="tel" required id="formPhone" placeholder="600 000 000" 
+                                               class="w-full px-4 py-3 rounded-xl bg-bio-surface border border-bio-border text-slate-100 placeholder-slate-500 text-xs focus:outline-none focus:border-bio-accent">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-mono text-slate-300 font-bold mb-1.5">País o Región de Interés *</label>
+                                    <input type="text" required id="formCountry" placeholder="Ej. España, México, Chile..." 
+                                           class="w-full px-4 py-3 rounded-xl bg-bio-surface border border-bio-border text-slate-100 placeholder-slate-500 text-xs focus:outline-none focus:border-bio-accent">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-mono text-slate-300 font-bold mb-1.5">Motivo de Contacto *</label>
+                                <select required id="formReason" class="w-full px-4 py-3 rounded-xl bg-bio-surface border border-bio-border text-slate-100 text-xs focus:outline-none focus:border-bio-accent cursor-pointer">
+                                    <option value="" disabled selected class="bg-bio-deep">Seleccione el motivo de su consulta...</option>
+                                    <option value="product_info" class="bg-bio-deep">Información de producto</option>
+                                    <option value="be_distributor" class="bg-bio-deep">Quiero ser distribuidor</option>
+                                    <option value="place_order" class="bg-bio-deep">Hacer un pedido</option>
+                                    <option value="technical_advice" class="bg-bio-deep">Asesoramiento técnico</option>
+                                    <option value="others" class="bg-bio-deep">Otros</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-mono text-slate-300 font-bold mb-1.5">Productos o Tecnologías de Interés</label>
+                                <input type="text" id="formProducts" placeholder="Ej. Ferticell Universal 0-0-1, Calcium 880, Explorer N16%..." 
+                                       class="w-full px-4 py-3 rounded-xl bg-bio-surface border border-bio-border text-slate-100 placeholder-slate-500 text-xs focus:outline-none focus:border-bio-accent">
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-mono text-slate-300 font-bold mb-1.5">Mensaje o Detalles del Proyecto</label>
+                                <textarea rows="4" id="formMsg" placeholder="Detalle el motivo de su contacto..." 
+                                          class="w-full px-4 py-3 rounded-xl bg-bio-surface border border-bio-border text-slate-100 placeholder-slate-500 text-xs focus:outline-none focus:border-bio-accent"></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full py-4 rounded-xl bg-bio-accent hover:bg-bio-400 text-bio-deep font-tech font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-xl shadow-bio-accent/20">
+                                Enviar Solicitud a Exportación →
+                            </button>
+                        </form>
+
+                        <div id="formSuccessAlert" class="hidden p-4 rounded-2xl bg-bio-accent/15 border border-bio-accent text-bio-accent text-xs font-mono text-center font-bold">
+                            ✓ ¡Solicitud registrada con éxito! El equipo de Agroplasma Exportación se pondrá en contacto en breve.
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-bio-border bg-bio-deep text-slate-400 py-16 no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+            <div class="grid md:grid-cols-4 gap-8 text-xs">
+                
+                <div class="space-y-4 md:col-span-1">
+                    <div class="flex items-center">
+                        <img src="logo-agroplasma.png" 
+                             alt="Agroplasma" 
+                             class="h-9 w-auto object-contain"
+                             onerror="this.onerror=null; this.classList.add('hidden'); document.getElementById('footer-logo-fallback').classList.remove('hidden');">
+                        
+                        <div id="footer-logo-fallback" class="hidden flex items-center font-tech text-xl font-black tracking-tight">
+                            <span class="text-[#F59300]">Agro</span><span class="text-bio-accent">plasma</span>
+                        </div>
+                    </div>
+                    <p class="text-slate-400 leading-relaxed text-[11px]">
+                        Fabricante líder en biotecnología celular vegetal e insumos orgánicos certificados con presencia en más de 25 países.
+                    </p>
+                    <p class="font-mono text-[#FFA928] text-[11px] font-bold">Inspired by Nature, Led by Technology.</p>
+                </div>
+
+                <div class="space-y-2.5">
+                    <h4 class="font-tech font-bold text-white uppercase tracking-wider">Navegación</h4>
+                    <ul class="space-y-2">
+                        <li><button onclick="showSection('inicio')" class="hover:text-bio-accent">Inicio</button></li>
+                        <li><button onclick="showSection('ice-tech')" class="hover:text-bio-accent">Tecnología I.C.E.</button></li>
+                        <li><button onclick="showSection('productos')" class="hover:text-bio-accent">Catálogo Ferticell®</button></li>
+                        <li><button onclick="showSection('nosotros')" class="hover:text-bio-accent">Planta Industrial & I+D</button></li>
+                        <li><button onclick="showSection('blog')" class="hover:text-bio-accent">Ensayos Técnicos</button></li>
+                    </ul>
+                </div>
+
+                <div class="space-y-2.5">
+                    <h4 class="font-tech font-bold text-white uppercase tracking-wider">Homologaciones</h4>
+                    <p>ECOCERT (CE) nº 848/2018</p>
+                    <p>USDA National Organic Program (NOP)</p>
+                    <p>JAS (Japanese Agricultural Standard)</p>
+                    <p>Insumos Aptos para Agricultura Ecológica Global</p>
+                </div>
+
+                <div class="space-y-2.5">
+                    <h4 class="font-tech font-bold text-white uppercase tracking-wider">Contacto</h4>
+                    <p>C. Torre del Mar, 56, Polígono Santa Teresa, 29004 Málaga, España.</p>
+                    <p>Tel: +34 951 769 790</p>
+                    <p>Email: info@agroplasma.com</p>
+                </div>
+
+            </div>
+
+            <div class="pt-8 border-t border-bio-border flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] font-mono text-slate-500">
+                <span>© 2026 Agroplasma SL. Todos los derechos reservados.</span>
+                <div class="flex items-center gap-4">
+                    <button onclick="openLegalModal()" class="hover:text-bio-accent transition-colors">Aviso Legal</button>
+                    <span>•</span>
+                    <button onclick="openPrivacyModal()" class="hover:text-bio-accent transition-colors">Política de Privacidad</button>
+                    <span>•</span>
+                    <button onclick="openCookiesModal()" class="hover:text-bio-accent transition-colors">Cookies</button>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- POP-UP AVISO LEGAL -->
+    <div id="legalNoticeModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden items-center justify-center p-4 overflow-y-auto no-print">
+        <div class="glass-panel rounded-3xl max-w-3xl w-full p-6 sm:p-10 border border-bio-border relative my-8 text-slate-200 space-y-6 max-h-[85vh] overflow-y-auto">
+            <button onclick="closeLegalModal()" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-bio-surface hover:bg-bio-dark text-slate-400 hover:text-white font-bold flex items-center justify-center transition-colors">✕</button>
+            
+            <div class="border-b border-bio-border pb-4">
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-[#F59300]/10 text-[#FFA928] border border-[#F59300]/30 uppercase">
+                    Información Legal & Normativa LSSI-CE
+                </span>
+                <h2 class="font-tech text-2xl sm:text-3xl font-extrabold text-white mt-2">Aviso Legal</h2>
+                <p class="text-xs font-mono text-bio-accent mt-1">Cumplimiento de la Ley 34/2002 (LSSI-CE) y Reglamento (UE) 2016/679 (RGPD)</p>
+            </div>
+
+            <div class="space-y-6 text-xs text-slate-300 font-normal leading-relaxed">
+                <div class="space-y-2">
+                    <h3 class="font-tech font-bold text-sm uppercase text-white tracking-wider">1. Datos Identificativos del Responsable</h3>
+                    <p>En cumplimiento con el artículo 10 de la <em>Ley 34/2002 (LSSI-CE)</em>, se exponen los datos del titular del sitio web:</p>
+                    <div class="grid sm:grid-cols-2 gap-2 p-3.5 rounded-2xl bg-bio-deep border border-bio-border font-mono text-[11px] text-slate-300">
+                        <div><strong class="text-white">Razón Social:</strong> AGROPLASMA S.L.</div>
+                        <div><strong class="text-white">Nombre Comercial:</strong> Agroplasma / Ferticell®</div>
+                        <div><strong class="text-white">Domicilio Social:</strong> C. Torre del Mar, 56, 29004 Málaga, España.</div>
+                        <div><strong class="text-white">N.I.F.:</strong> B-29831456 (Reg. Mercantil de Málaga)</div>
+                        <div><strong class="text-white">Teléfono:</strong> +34 951 769 790</div>
+                        <div><strong class="text-white">Email:</strong> info@agroplasma.com</div>
+                    </div>
+                </div>
+
+                <div class="space-y-2">
+                    <h3 class="font-tech font-bold text-sm uppercase text-white tracking-wider">2. Propiedad Intelectual</h3>
+                    <p>
+                        Todos los derechos sobre logotipos, marcas registradas (en particular <strong>FERTICELL®</strong> e <strong>I.C.E. - Inter Cellular Exchange</strong>), fichas técnicas, formulaciones e infografías son propiedad exclusiva de AGROPLASMA S.L.
+                    </p>
+                </div>
+
+                <div class="space-y-2">
+                    <h3 class="font-tech font-bold text-sm uppercase text-white tracking-wider">3. Exención de Responsabilidades Agronómicas</h3>
+                    <p>
+                        Las recomendaciones y dosificaciones orientativas están sujetas a factores agroclimáticos de cada parcela. AGROPLASMA S.L. no se responsabiliza de aplicaciones que no sigan las instrucciones oficiales de cada ficha técnica.
+                    </p>
+                </div>
+            </div>
+
+            <div class="pt-4 border-t border-bio-border flex justify-end">
+                <button onclick="closeLegalModal()" class="px-6 py-2.5 rounded-xl bg-bio-accent hover:bg-bio-400 text-bio-deep font-tech font-bold text-xs uppercase tracking-wider transition-colors shadow-sm">
+                    Entendido y Aceptar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- POP-UP POLÍTICA DE PRIVACIDAD -->
+    <div id="privacyPolicyModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden items-center justify-center p-4 overflow-y-auto no-print">
+        <div class="glass-panel rounded-3xl max-w-3xl w-full p-6 sm:p-10 border border-bio-border relative my-8 text-slate-200 space-y-6 max-h-[85vh] overflow-y-auto">
+            <button onclick="closePrivacyModal()" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-bio-surface hover:bg-bio-dark text-slate-400 hover:text-white font-bold flex items-center justify-center transition-colors">✕</button>
+            
+            <div class="border-b border-bio-border pb-4">
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-bio-accent/15 text-bio-accent border border-bio-accent/30 uppercase">
+                    Protección de Datos • RGPD (UE) 2016/679 & LOPD-GDD 3/2018
+                </span>
+                <h2 class="font-tech text-2xl sm:text-3xl font-extrabold text-white mt-2">Política de Privacidad</h2>
+                <p class="text-xs font-mono text-bio-accent mt-1">Transparencia y seguridad en el tratamiento de sus datos de contacto profesional</p>
+            </div>
+
+            <div class="space-y-6 text-xs text-slate-300 font-normal leading-relaxed">
+                <div class="space-y-2">
+                    <h3 class="font-tech font-bold text-sm uppercase text-white tracking-wider">1. Responsable del Tratamiento</h3>
+                    <p>AGROPLASMA S.L., con domicilio en C. Torre del Mar, 56, 29004 Málaga (España) y contacto en: <strong class="text-white">info@agroplasma.com</strong>.</p>
+                </div>
+
+                <div class="space-y-2">
+                    <h3 class="font-tech font-bold text-sm uppercase text-white tracking-wider">2. Finalidad del Tratamiento</h3>
+                    <ul class="list-disc pl-5 space-y-1.5 text-slate-300">
+                        <li>Atención de solicitudes de distribución comercial B2B y proyectos de Private Label.</li>
+                        <li>Soporte y asesoramiento técnico sobre la tecnología I.C.E. y dosis por cultivo.</li>
+                        <li>Envío de circulares técnicas y actualizaciones de catálogo a clientes registrados.</li>
+                    </ul>
+                </div>
+
+                <div class="space-y-2">
+                    <h3 class="font-tech font-bold text-sm uppercase text-white tracking-wider">3. Ejercicio de Derechos</h3>
+                    <p>
+                        Puede ejercitar sus derechos de acceso, rectificación, supresión y oposición enviando un correo electrónico acreditado a: <strong class="text-bio-accent">info@agroplasma.com</strong>.
+                    </p>
+                </div>
+            </div>
+
+            <div class="pt-4 border-t border-bio-border flex justify-end">
+                <button onclick="closePrivacyModal()" class="px-6 py-2.5 rounded-xl bg-bio-accent hover:bg-bio-400 text-bio-deep font-tech font-bold text-xs uppercase tracking-wider transition-colors shadow-sm">
+                    Entendido y Aceptar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- POP-UP POLÍTICA DE COOKIES -->
+    <div id="cookiesPolicyModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden items-center justify-center p-4 overflow-y-auto no-print">
+        <div class="glass-panel rounded-3xl max-w-3xl w-full p-6 sm:p-10 border border-bio-border relative my-8 text-slate-200 space-y-6 max-h-[85vh] overflow-y-auto">
+            <button onclick="closeCookiesModal()" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-bio-surface hover:bg-bio-dark text-slate-400 hover:text-white font-bold flex items-center justify-center transition-colors">✕</button>
+            
+            <div class="border-b border-bio-border pb-4">
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-[#F59300]/10 text-[#FFA928] border border-[#F59300]/30 uppercase">
+                    Normativa Art. 22.2 LSSI-CE & Directrices AEPD
+                </span>
+                <h2 class="font-tech text-2xl sm:text-3xl font-extrabold text-white mt-2">Política de Cookies</h2>
+                <p class="text-xs font-mono text-bio-accent mt-1">Uso de dispositivos de almacenamiento técnico y analítica de navegación</p>
+            </div>
+
+            <div class="space-y-6 text-xs text-slate-300 font-normal leading-relaxed">
+                <p>
+                    Este sitio web utiliza cookies técnicas para garantizar la navegación y cookies analíticas para medir de forma anónima las visitas y consultas a nuestras fichas técnicas. Para cualquier duda o gestión de consentimiento, contacte con: <strong class="text-white">info@agroplasma.com</strong>.
+                </p>
+            </div>
+
+            <div class="pt-4 border-t border-bio-border flex justify-end">
+                <button onclick="closeCookiesModal()" class="px-6 py-2.5 rounded-xl bg-bio-accent hover:bg-bio-400 text-bio-deep font-tech font-bold text-xs uppercase tracking-wider transition-colors shadow-sm">
+                    Entendido y Aceptar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- BANNER DE CONSENTIMIENTO DE COOKIES -->
+    <div id="cookieConsentBanner" class="fixed bottom-4 left-4 right-4 sm:left-6 sm:right-auto sm:max-w-md z-50 glass-panel rounded-2xl p-5 border border-bio-border shadow-2xl space-y-3 hidden no-print">
+        <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-[#FFA928] animate-ping"></span>
+            <span class="font-tech font-bold text-xs uppercase text-white tracking-wider">Uso de Cookies en Agroplasma</span>
+        </div>
+        <p class="text-[11px] text-slate-300 leading-relaxed font-normal">
+            Utilizamos cookies técnicas necesarias para el portal y analíticas anónimas para evaluar el rendimiento de nuestras fichas técnicas. Consulte nuestra <button onclick="openCookiesModal()" class="text-bio-accent underline font-semibold">Política de Cookies</button>.
+        </p>
+        <div class="flex items-center gap-2 pt-1 font-tech font-bold text-[11px]">
+            <button onclick="acceptAllCookies()" class="flex-1 py-2 rounded-xl bg-bio-accent hover:bg-bio-400 text-bio-deep uppercase tracking-wider transition-colors">
+                Aceptar Todas
+            </button>
+            <button onclick="rejectOptionalCookies()" class="flex-1 py-2 rounded-xl bg-bio-surface hover:bg-bio-dark text-slate-300 border border-bio-border uppercase tracking-wider transition-colors">
+                Solo Necesarias
+            </button>
+        </div>
+    </div>
+
+    <!-- MODAL DE FICHA TÉCNICA DE PRODUCTO -->
+    <div id="techProductModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden items-center justify-center p-4 overflow-y-auto no-print">
+        <div class="glass-panel rounded-3xl max-w-2xl w-full p-6 sm:p-8 border border-bio-border relative my-8 text-slate-200 space-y-6">
+            <button onclick="closeProductModal()" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-bio-surface hover:bg-bio-dark text-slate-400 hover:text-white font-bold flex items-center justify-center transition-colors">✕</button>
+            <div id="modalProductBody"></div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT: NAVEGACIÓN SPA, BASE DE DATOS Y CANVAS -->
+    <script>
+        // --- 0. ANIMACIÓN CANVAS DE MICROALGAS VIVAS ---
+        (function initAquaticAlgae() {
+            const canvas = document.getElementById('algaeCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let width, height;
+            let algaeArray = [];
+
+            // Seguimiento del cursor / toque interactivo
+            const mouse = {
+                x: null,
+                y: null,
+                radius: 120 // Radio de influencia de repulsión/reacción
+            };
+
+            window.addEventListener('mousemove', (e) => {
+                mouse.x = e.clientX;
+                mouse.y = e.clientY;
+            });
+
+            window.addEventListener('touchmove', (e) => {
+                if (e.touches.length > 0) {
+                    mouse.x = e.touches[0].clientX;
+                    mouse.y = e.touches[0].clientY;
+                }
+            }, { passive: true });
+
+            window.addEventListener('mouseleave', () => {
+                mouse.x = null;
+                mouse.y = null;
+            });
+
+            window.addEventListener('touchend', () => {
+                mouse.x = null;
+                mouse.y = null;
+            });
+
+            function resize() {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            }
+            window.addEventListener('resize', () => {
+                resize();
+                createAlgae();
+            });
+
+            class MicroAlga {
+                constructor() {
+                    this.init(true);
+                }
+
+                init(randomY = false) {
+                    this.x = Math.random() * (width || window.innerWidth);
+                    this.y = randomY ? Math.random() * (height || window.innerHeight) : (height + Math.random() * 40);
+                    this.depth = Math.random();
+                    this.radius = 1.2 + this.depth * 3.2; 
+                    this.aspectRatio = 0.85 + Math.random() * 0.3;
+                    this.angle = Math.random() * Math.PI * 2;
+                    this.spinSpeed = (Math.random() - 0.5) * 0.01;
+
+                    this.baseVy = -(0.25 + this.depth * 0.45);
+                    this.vy = this.baseVy;
+                    this.vx = (Math.random() - 0.5) * 0.25;
+                    this.wavePhase = Math.random() * Math.PI * 2;
+
+                    const isAmber = Math.random() < 0.22;
+                    if (isAmber) {
+                        this.r = 245; this.g = 147; this.b = 0;
+                    } else {
+                        this.r = 34; this.g = 197; this.b = 94;
+                    }
+                    this.alpha = 0.18 + this.depth * 0.4;
+                }
+
+                update() {
+                    this.wavePhase += 0.02;
+                    const waveOffset = Math.sin(this.wavePhase) * 0.35;
+                    this.x += waveOffset + this.vx;
+                    this.y += this.vy;
+                    this.angle += this.spinSpeed;
+
+                    // Reacción interactiva al pasar el cursor / dedo
+                    if (mouse.x !== null && mouse.y !== null) {
+                        const dx = this.x - mouse.x;
+                        const dy = this.y - mouse.y;
+                        const distance = Math.hypot(dx, dy);
+
+                        if (distance < mouse.radius && distance > 0) {
+                            // Fuerza elástica de repulsión hidrodinámica
+                            const force = (mouse.radius - distance) / mouse.radius;
+                            const forceDirectionX = dx / distance;
+                            const forceDirectionY = dy / distance;
+
+                            this.x += forceDirectionX * force * 5;
+                            this.y += forceDirectionY * force * 5;
+
+                            // Efecto de rotación acelerada al ser perturbada
+                            this.angle += force * 0.08;
+                        }
+                    }
+
+                    // Amortiguación gradual de velocidad horizontal hacia la calma
+                    this.vx *= 0.98;
+
+                    // Regeneración al salir de los límites de pantalla
+                    if (this.y < -30 || this.x < -40 || this.x > width + 40) {
+                        this.init(false);
+                    }
+                }
+
+                draw() {
+                    ctx.save();
+                    ctx.translate(this.x, this.y);
+                    ctx.rotate(this.angle);
+
+                    ctx.beginPath();
+                    ctx.ellipse(0, 0, this.radius, this.radius * this.aspectRatio, 0, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(${this.r}, ${this.g}, ${this.b}, ${this.alpha})`;
+                    ctx.fill();
+
+                    // Brillo suave en el núcleo de la microalga
+                    ctx.beginPath();
+                    ctx.arc(0, 0, this.radius * 0.35, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(255, 255, 255, ${this.alpha * 0.6})`;
+                    ctx.fill();
+
+                    ctx.restore();
+                }
+            }
+
+            function createAlgae() {
+                algaeArray = [];
+                const count = Math.floor((width * height) / 28000) + 25; 
+                for (let i = 0; i < Math.min(count, 65); i++) {
+                    algaeArray.push(new MicroAlga());
+                }
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, width, height);
+                for (let i = 0; i < algaeArray.length; i++) {
+                    algaeArray[i].update();
+                    algaeArray[i].draw();
+                }
+                requestAnimationFrame(animate);
+            }
+
+            resize();
+            createAlgae();
+            animate();
+        })();
+
+        // --- 1. ENRUTADOR SPA ---
+        function showSection(sectionId) {
+            document.querySelectorAll('.view-section').forEach(sec => {
+                sec.classList.add('hidden');
+            });
+            const target = document.getElementById(`section-${sectionId}`);
+            if (target) {
+                target.classList.remove('hidden');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            document.querySelectorAll('.nav-link').forEach(btn => {
+                if (btn.getAttribute('data-target') === sectionId) {
+                    btn.classList.add('text-bio-accent');
+                    btn.classList.remove('text-slate-300');
+                } else {
+                    btn.classList.remove('text-bio-accent');
+                    btn.classList.add('text-slate-300');
+                }
+            });
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        // --- 2. BASE DE DATOS DE PRODUCTOS ---
+        const productsDB = [
+            {
+                id: "universal",
+                title: "FERTICELL Universal 0-0-1",
+                category: "biostimulants",
+                catLabel: "Bioestimulante Ecológico",
+                sub: "25% Solución Concentrada de Algas de Agua Dulce",
+                desc: "Bioestimulante líquido de agua dulce libre de sales de sodio perjudiciales. Estimula auxinas y citoquininas naturales para regeneración radicular, tolerancia a sequía y aumento de floración.",
+                specs: { "Estado": "Líquido Soluble", "Densidad": "1,07 Kg/L", "pH": "6,00 ± 1,0", "Algas Agua Dulce": "25% p/p", "K₂O Total": "≥ 1,00% w/w" },
+                badge: "100% Sin Cloruros",
+                packaging: "1 L | 10 L | 20 L | 1000 L IBC"
+            },
+            {
+                id: "explorer16",
+                title: "FERTICELL Explorer N 16% Powder",
+                category: "nitrogen",
+                catLabel: "Nitrógeno Orgánico Polvo",
+                sub: "Soja No OMG • 16% N Disponible • 98% Aminoácidos",
+                desc: "Fertilizante en polvo 100% soluble. Aporta nitrógeno de rápida disponibilidad que no se lixivia del suelo y dinamiza la microflora beneficiosa.",
+                specs: { "Estado": "Polvo Soluble", "N Orgánico": "15,80% w/w", "Materia Seca": "97,60%", "Aminoácidos": "98,60% p/p", "Materia Orgánica": "91% p/p" },
+                badge: "98% Aminoácidos",
+                packaging: "Sacos de 20 Kg (Pallets 600/800 Kg)"
+            },
+            {
+                id: "explorer145",
+                title: "FERTICELL Explorer N 14.5% Plant Based",
+                category: "nitrogen",
+                catLabel: "Nitrógeno 100% Vegetal",
+                sub: "Cero Insumos de Origen Animal • 88% Aminoácidos",
+                desc: "Polvo soluble exclusivamente vegetal para agricultura ecológica estricta. Rápida absorción foliar y radicular sin lixiviación edáfica.",
+                specs: { "Estado": "Polvo Soluble", "N Orgánico": "14,04% w/w", "Humedad": "2,80%", "Aminoácidos": "88% p/p" },
+                badge: "100% Plant Based",
+                packaging: "Sacos de 20 Kg"
+            },
+            {
+                id: "nutriplus10",
+                title: "FERTICELL Nutriplus N 10% Liquid",
+                category: "nitrogen",
+                catLabel: "Nitrógeno Líquido Concentrado",
+                sub: "10% N Orgánico • 60% Aminoácidos • 62.6% M.O.",
+                desc: "La mayor concentración de Nitrógeno orgánico líquido soluble de la gama. Efecto de choque nutricional inmediato en picos de demanda vegetativa.",
+                specs: { "Estado": "Líquido Soluble", "Densidad": "1,26 Kg/L", "pH": "7,50 ± 1,0", "N Orgánico": "≥ 10,00% w/w", "Aminoácidos": "60% w/w" },
+                badge: "Alta Graduación",
+                packaging: "10 L | 20 L | 1000 L IBC"
+            },
+            {
+                id: "potassium20",
+                title: "FERTICELL Potassium 20% Liquid",
+                category: "pk",
+                catLabel: "Potasio Orgánico Soluble",
+                sub: "K₂O ≥ 20.0% w/w • Libre de Cloruros",
+                desc: "Potasio orgánico concentrado. Regula la apertura de estomas, incrementa grados Brix, calibre y eleva rendimientos de cosecha hasta un +25%.",
+                specs: { "Estado": "Líquido Soluble", "Densidad": "1,31 - 1,33 Kg/L", "pH": "8,0 ± 1,0 / 13,5", "K₂O Total": "≥ 20,0% w/w" },
+                badge: "Maduración & ºBrix",
+                packaging: "10 L | 20 L | 1000 L IBC"
+            },
+            {
+                id: "phosphor20",
+                title: "FERTICELL Phosphor 0-20-0 Suspension",
+                category: "pk",
+                catLabel: "Fósforo Mineral en Suspensión",
+                sub: "P₂O₅ ≥ 20% w/w • Suspensión Concentrada",
+                desc: "Fósforo mineral en suspensión líquida de liberación sostenida. Genera energía celular (ATP) continua para floración y masa radicular.",
+                specs: { "Estado": "Suspensión Líquida", "Densidad": "1,80 Kg/L", "pH": "7,30 ± 1,0", "P₂O₅ Total": "≥ 20,0% w/w" },
+                badge: "Energía ATP",
+                packaging: "10 L | 1000 L IBC"
+            },
+            {
+                id: "calcium880",
+                title: "FERTICELL Calcium 880 40% Plus",
+                category: "suspension",
+                catLabel: "Suspensión Calcio Concentrado",
+                sub: "Carbonato de Calcio Líquido + Algas de Agua Dulce",
+                desc: "Suspensión líquida concentrada de calcio. Penetra velozmente por estomas, otorga firmeza estructural a la fruta y neutraliza sales del suelo.",
+                specs: { "Estado": "Suspensión Ultrafina", "Densidad": "1,72 Kg/L", "pH": "9,3 ± 1,0", "Calcio Total": "≥ 40% w/v", "CaO": "≥ 35% w/w" },
+                badge: "Máxima Asimilación",
+                packaging: "10 L | 1000 L IBC"
+            },
+            {
+                id: "supermag",
+                title: "FERTICELL Super Mag 35% Suspension",
+                category: "suspension",
+                catLabel: "Magnesio Líquido Concentrado",
+                sub: "3 Veces más concentrado que las sales de Epson",
+                desc: "Suspensión concentrada de Magnesio (MgO ≥ 35% w/v). Ahorra pasadas en campo. Máxima activación de la clorofila y transporte de azúcares.",
+                specs: { "Estado": "Suspensión Líquida", "Densidad": "1,82 Kg/L", "pH": "10,5 ± 1,0", "MgO": "≥ 35% w/v", "Mg Total": "≥ 27% w/v" },
+                badge: "3x vs Epson",
+                packaging: "10 L | 1000 L IBC"
+            },
+            {
+                id: "zinc40",
+                title: "FERTICELL Zinc 40% Suspension",
+                category: "suspension",
+                catLabel: "Zinc Concentrado en Suspensión",
+                sub: "8-10 Veces más concentrado que un quelato líquido",
+                desc: "Suspensión de zinc de alta graduación (ZnO ≥ 40% w/v). Clave en la síntesis natural de auxinas y desarrollo de entrenudos.",
+                specs: { "Estado": "Suspensión Líquida", "Densidad": "1,40 Kg/L", "pH": "10,2 ± 1,0", "Zinc Total": "≥ 32% w/v", "ZnO": "≥ 40% w/v" },
+                badge: "Alta Concentración",
+                packaging: "10 L | 20 L | 1000 L IBC"
+            },
+            {
+                id: "microiron",
+                title: "FERTICELL Micro Iron Liquid",
+                category: "micro",
+                catLabel: "Hierro (II) Asimilable",
+                sub: "FeO ≥ 8.38% w/w • Óxido de Hierro II + Algas",
+                desc: "Aporta Hierro directamente asimilable en forma Fe²⁺. Corrección fulgurante de clorosis férrica sin los bloqueos típicos de suelos calcáreos.",
+                specs: { "Estado": "Líquido Soluble", "Densidad": "1,18 Kg/L", "pH": "2,4 ± 0,5", "Hierro Total": "≥ 6,00% w/w", "FeO": "8,38% w/w" },
+                badge: "Fe²⁺ Asimilable",
+                packaging: "10 L | 20 L | 1000 L IBC"
+            },
+            {
+                id: "microboron",
+                title: "FERTICELL Micro Boron Liquid",
+                category: "micro",
+                catLabel: "Boro Bio-Activado",
+                sub: "Boro Etanolamina Totalmente Soluble + Algas",
+                desc: "Corrector orgánico de boro etanolamina. Garantiza la viabilidad del polen, homogeneiza el cuajado y evita fisuras o cracking de la piel.",
+                specs: { "Estado": "Líquido Soluble", "Densidad": "1,22 Kg/L", "pH": "7,8 ± 0,5", "Boro Total": "≥ 6,00% w/w", "B₂O₃": "20,93% w/w" },
+                badge: "Cuajado Seguro",
+                packaging: "10 L | 20 L | 1000 L IBC"
+            },
+            {
+                id: "humicoliquid",
+                title: "FERTICELL Húmico Leonardit",
+                category: "humic",
+                catLabel: "Acondicionador de Suelos",
+                sub: "Leonardita Natural • 11% Húmicos • 1% Fúlvicos • 26% K₂O",
+                desc: "Sal potásica de ácidos húmicos de origen leonardita. Eleva la Capacidad de Intercambio Catiónico (CIC) e inactiva sustancias salinas tóxicas en el suelo.",
+                specs: { "Estado": "Líquido", "Densidad": "1,15 Kg/L", "pH": "≥ 13,5 ± 1,0", "Ácidos Húmicos": "11% w/w", "K₂O": "26% w/w" },
+                badge: "Estructurador Suelo",
+                packaging: "10 L | 20 L | 1000 L IBC"
+            },
+            {
+                id: "npksoluble",
+                title: "FERTICELL NPK Powder Soluble Series",
+                category: "npk",
+                catLabel: "NPK Polvo 100% Soluble",
+                sub: "90% de Absorción Foliar en las Primeras 3 Horas",
+                desc: "Gama completa de formulaciones NPK ecológicas (9-4-4, 8-3-18, 10-4-5, etc.) enriquecidas con aminoácidos libres cicatrizantes de heridas.",
+                specs: { "Origen N": "Soja No OMG", "Origen P": "Pentóxido Soluble", "Origen K": "Óxido Potasio", "Solubilidad": "100%" },
+                badge: "90% Foliar 3h",
+                packaging: "Sacos de 20 Kg"
+            },
+            {
+                id: "nznice",
+                title: "FERTICELL NZn Endoplasma I.C.E.",
+                category: "special",
+                catLabel: "Endoplasma Aplicación al Tronco",
+                sub: "Absorción por la Madera e Incorporación a Savia en 24h",
+                desc: "Formulado para pulverizarse directo sobre la corteza externa de los árboles. Penetra la madera e incorpora Nitrógeno (60 g/L) y Zinc (11,5 g/L) al xilema sin heridas mecánicas.",
+                specs: { "N Orgánico": "60 g/L", "Zinc (Zn)": "11,5 g/L", "Densidad": "1,19 Kg/L", "pH": "5,3 ± 0,5" },
+                badge: "Vía Madera 24h",
+                packaging: "10 L | 20 L | 1000 L IBC"
+            },
+            {
+                id: "homegarden",
+                title: "Ferticell Home & Garden Series",
+                category: "home",
+                catLabel: "Línea Retail & Doméstica",
+                sub: "Doypack 0.5L • Seguro para Mascotas y Polinizadores",
+                desc: "Nutrición vegetal de alta gama adaptada para huertos urbanos, jardinería doméstica y floricultura. Apto para marca privada en formato de alta rotación.",
+                specs: { "Formato": "Doypack 0,5 Litros", "Caja": "16 botellas", "Pallet": "60 cajas", "Seguridad": "100% Pet & Child Safe" },
+                badge: "Doypack Retail",
+                packaging: "Cajas de 16 botellas (0,5 L)"
+            }
+        ];
+
+        // --- 3. RENDERIZADO DEL CATÁLOGO DE PRODUCTOS ---
+        function renderProducts(items) {
+            const container = document.getElementById('productCardsGrid');
+            if (!container) return;
+
+            if (items.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full text-center py-12 glass-panel rounded-3xl border border-bio-border">
+                        <span class="text-3xl">🔍</span>
+                        <p class="font-tech text-white text-base font-bold mt-2">No se encontraron formulaciones</p>
+                        <p class="text-xs text-slate-400 mt-1">Pruebe con términos como "Calcio", "Nitrógeno", "Polvo", "Algas" o "K₂O".</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = items.map(p => `
+                <div class="glass-panel rounded-3xl p-6 border border-bio-border hover:border-bio-accent transition-all duration-300 flex flex-col justify-between group shadow-sm hover:shadow-md">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-bio-accent/15 text-bio-accent border border-bio-accent/30 uppercase">
+                                ${p.catLabel}
+                            </span>
+                            <span class="text-[10px] font-mono text-[#FFA928] font-bold">${p.badge}</span>
+                        </div>
+
+                        <h3 class="font-tech text-xl font-bold text-white group-hover:text-bio-accent transition-colors">
+                            ${p.title}
+                        </h3>
+                        <p class="text-[11px] font-mono text-bio-accent font-semibold">${p.sub}</p>
+                        <p class="text-xs text-slate-300 font-normal leading-relaxed line-clamp-3">
+                            ${p.desc}
+                        </p>
+
+                        <div class="grid grid-cols-2 gap-2 text-[10px] font-mono bg-bio-deep p-3 rounded-2xl border border-bio-border text-slate-300">
+                            ${Object.entries(p.specs).slice(0, 4).map(([k, v]) => `
+                                <div><strong class="text-white">${k}:</strong> ${v}</div>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <div class="pt-4 mt-4 border-t border-bio-border/60 flex items-center justify-between">
+                        <span class="text-[10px] font-mono text-slate-400">${p.packaging}</span>
+                        <button onclick="openProductModal('${p.id}')" class="px-3.5 py-2 rounded-xl bg-bio-surface hover:bg-bio-accent hover:text-bio-deep text-slate-200 border border-bio-border font-tech font-bold text-xs uppercase tracking-wider transition-all">
+                            Ficha Técnica →
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Filtros y Búsqueda
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts(productsDB);
+
+            document.querySelectorAll('.cat-filter').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.cat-filter').forEach(b => {
+                        b.classList.remove('active', 'bg-bio-accent', 'text-bio-deep', 'shadow-sm');
+                        b.classList.add('bg-bio-surface', 'text-slate-300', 'border', 'border-bio-border');
+                    });
+                    btn.classList.add('active', 'bg-bio-accent', 'text-bio-deep', 'shadow-sm');
+                    btn.classList.remove('bg-bio-surface', 'text-slate-300');
+
+                    const cat = btn.getAttribute('data-cat');
+                    if (cat === 'all') {
+                        renderProducts(productsDB);
+                    } else {
+                        const filtered = productsDB.filter(p => p.category === cat);
+                        renderProducts(filtered);
+                    }
+                });
+            });
+
+            const searchInput = document.getElementById('searchProductInput');
+            if (searchInput) {
+                searchInput.addEventListener('input', (e) => {
+                    const q = e.target.value.toLowerCase().trim();
+                    const filtered = productsDB.filter(p => 
+                        p.title.toLowerCase().includes(q) || 
+                        p.desc.toLowerCase().includes(q) ||
+                        p.sub.toLowerCase().includes(q) ||
+                        p.catLabel.toLowerCase().includes(q)
+                    );
+                    renderProducts(filtered);
+                });
+            }
+        });
+
+        // --- 4. MODALES TÉCNICOS Y LEGALES ---
+        function openProductModal(productId) {
+            const product = productsDB.find(p => p.id === productId);
+            if (!product) return;
+
+            let specsGrid = '';
+            for (const [key, value] of Object.entries(product.specs)) {
+                specsGrid += `
+                    <div class="p-3 bg-bio-deep rounded-xl border border-bio-border">
+                        <span class="block text-[10px] font-mono text-slate-400 uppercase font-semibold">${key}</span>
+                        <span class="text-xs font-mono font-bold text-white">${value}</span>
+                    </div>
+                `;
+            }
+
+            const bodyHtml = `
+                <div class="space-y-4">
+                    <div class="border-b border-bio-border pb-3">
+                        <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-bio-accent/15 text-bio-accent border border-bio-accent/30 uppercase">
+                            ${product.catLabel}
+                        </span>
+                        <h2 class="font-tech text-2xl font-extrabold text-white mt-2">${product.title}</h2>
+                        <p class="text-xs font-mono text-bio-accent font-semibold">${product.sub}</p>
+                    </div>
+
+                    <p class="text-xs text-slate-300 leading-relaxed font-normal">${product.desc}</p>
+
+                    <div>
+                        <h4 class="font-tech font-bold text-xs uppercase tracking-wider text-white mb-2">Especificaciones Técnicas Certificadas:</h4>
+                        <div class="grid grid-cols-2 gap-2">
+                            ${specsGrid}
+                        </div>
+                    </div>
+
+                    <div class="p-4 rounded-2xl bg-bio-deep border border-bio-border space-y-2">
+                        <div class="flex items-center justify-between text-xs font-mono">
+                            <span class="text-slate-400">Envases estándar:</span>
+                            <span class="text-white font-bold">${product.packaging}</span>
+                        </div>
+                        <div class="flex items-center justify-between text-xs font-mono">
+                            <span class="text-slate-400">Homologación:</span>
+                            <span class="text-bio-accent font-bold">ECOCERT / USDA-NOP / JAS</span>
+                        </div>
+                    </div>
+
+                    <div class="pt-2 flex gap-3">
+                        <button onclick="closeProductModal(); showSection('contacto'); document.getElementById('formProducts').value = '${product.title}';" 
+                                class="w-full py-3 rounded-xl bg-bio-accent hover:bg-bio-400 text-bio-deep font-tech font-bold text-xs uppercase tracking-wider transition-colors shadow-sm">
+                            Solicitar Cotización o Muestra B2B →
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('modalProductBody').innerHTML = bodyHtml;
+            const modal = document.getElementById('techProductModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeProductModal() {
+            const modal = document.getElementById('techProductModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function openLegalModal() {
+            const m = document.getElementById('legalNoticeModal');
+            m.classList.remove('hidden');
+            m.classList.add('flex');
+        }
+        function closeLegalModal() {
+            const m = document.getElementById('legalNoticeModal');
+            m.classList.add('hidden');
+            m.classList.remove('flex');
+        }
+
+        function openPrivacyModal() {
+            const m = document.getElementById('privacyPolicyModal');
+            m.classList.remove('hidden');
+            m.classList.add('flex');
+        }
+        function closePrivacyModal() {
+            const m = document.getElementById('privacyPolicyModal');
+            m.classList.add('hidden');
+            m.classList.remove('flex');
+        }
+
+        function openCookiesModal() {
+            const m = document.getElementById('cookiesPolicyModal');
+            m.classList.remove('hidden');
+            m.classList.add('flex');
+        }
+        function closeCookiesModal() {
+            const m = document.getElementById('cookiesPolicyModal');
+            m.classList.add('hidden');
+            m.classList.remove('flex');
+        }
+
+        function acceptAllCookies() {
+            localStorage.setItem('agro_cookies_consent', 'all');
+            document.getElementById('cookieConsentBanner').classList.add('hidden');
+        }
+        function rejectOptionalCookies() {
+            localStorage.setItem('agro_cookies_consent', 'essential');
+            document.getElementById('cookieConsentBanner').classList.add('hidden');
+        }
+
+        // --- 5. AUDIO TOGGLE DEL VÍDEO ---
+        function toggleVideoAudio() {
+            const video = document.getElementById('iceTechVideo');
+            const btn = document.getElementById('btnVideoAudio');
+            if (!video || !btn) return;
+
+            if (video.muted) {
+                video.muted = false;
+                btn.innerText = '🔊 Con Audio';
+                btn.classList.add('text-[#FFA928]', 'border-[#FFA928]');
+            } else {
+                video.muted = true;
+                btn.innerText = '🔇 Silencio';
+                btn.classList.remove('text-[#FFA928]', 'border-[#FFA928]');
+            }
+        }
+        window.toggleVideoAudio = toggleVideoAudio;
+
+        // --- 6. ENVÍO DE FORMULARIO DE CONTACTO ---
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            document.getElementById('leadContactForm').reset();
+            const alert = document.getElementById('formSuccessAlert');
+            alert.classList.remove('hidden');
+            setTimeout(() => {
+                alert.classList.add('hidden');
+            }, 6000);
+        }
+
+        // Inicialización de Cookies Banner
+        window.addEventListener('load', () => {
+            if (!localStorage.getItem('agro_cookies_consent')) {
+                const b = document.getElementById('cookieConsentBanner');
+                if (b) b.classList.remove('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
