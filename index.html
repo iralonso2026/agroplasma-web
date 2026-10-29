@@ -454,7 +454,7 @@
                 <div class="grid lg:grid-cols-2 gap-10 items-stretch">
                     
                     <!-- DINÁMICA FOLIAR -->
-                    <div class="glass-panel rounded-3xl p-8 border border-bio-border flex flex-col justify-between space-y-6">
+                    <div class="glass-panel rounded-3xl p-6 sm:p-8 border border-bio-border flex flex-col justify-between space-y-6">
                         <div class="space-y-4">
                             <div class="flex items-center justify-between">
                                 <span class="px-3 py-1 rounded-full bg-[#F59300]/10 border border-[#F59300]/30 text-[#FFA928] text-xs font-mono uppercase font-bold">
@@ -463,41 +463,100 @@
                                 <span class="text-xs font-mono text-slate-400 font-semibold">ESTOMAS &amp; MESÓFILO</span>
                             </div>
 
-                            <h3 class="font-tech text-2xl font-bold text-white">Dinámica de Penetración Foliar</h3>
+                            <h3 class="font-tech text-2xl font-bold text-white">Dinámica de Penetración Foliar (4 Pasos)</h3>
+                            <p class="text-xs text-slate-300 font-normal leading-relaxed">
+                                Proceso biológico secuencial desde la gota de pulverización hasta la translocación citoplásmica en los haces conductores:
+                            </p>
 
-                            <!-- Imagen de Penetración Foliar con Fallback y múltiples rutas -->
-                            <div class="relative rounded-2xl overflow-hidden border border-bio-border bg-bio-deep min-h-[200px] flex items-center justify-center group">
-                                <img src="img/1.png" 
-                                     alt="Penetración foliar por estomas I.C.E."
-                                     class="w-full h-56 object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                                     onerror="if(!this.dataset.r){this.dataset.r='1';this.src='img/2.png';} else if(this.dataset.r==='1'){this.dataset.r='2';this.src='img/3.png';} else if(this.dataset.r==='2'){this.dataset.r='3';this.src='img/ice-foliar-penetration.jpg';} else {this.onerror=null; this.classList.add('hidden'); document.getElementById('fb-foliar-img').classList.remove('hidden');}">
+                            <!-- Cuadrícula interactiva de los 4 Pasos con sus imágenes correspondientes -->
+                            <div class="grid sm:grid-cols-2 gap-3.5 pt-2">
                                 
-                                <div id="fb-foliar-img" class="hidden p-6 text-center space-y-2">
-                                    <div class="w-12 h-12 mx-auto rounded-2xl bg-[#F59300]/10 border border-[#F59300]/30 flex items-center justify-center text-[#FFA928]">
-                                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+                                <!-- PASO 1 -->
+                                <div class="p-3.5 rounded-2xl bg-bio-deep border border-bio-border hover:border-[#F59300]/60 transition-all flex flex-col justify-between space-y-2 group">
+                                    <div class="relative w-full h-28 rounded-xl overflow-hidden bg-black/60 border border-white/5 flex items-center justify-center">
+                                        <img src="img/1.png" 
+                                             alt="Paso 1: Escala Subestomática" 
+                                             class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                                             onerror="if(!this.dataset.r){this.dataset.r='1';this.src='1.png';} else {this.onerror=null; this.classList.add('hidden'); document.getElementById('fb-p1').classList.remove('hidden');}">
+                                        <div id="fb-p1" class="hidden text-[10px] font-mono text-slate-400 p-2 text-center">img/1.png</div>
+                                        <span class="absolute top-2 left-2 px-2 py-0.5 rounded-md bg-black/80 backdrop-blur-sm text-[10px] font-mono font-bold text-[#FFA928] border border-[#FFA928]/40">
+                                            PASO 01
+                                        </span>
                                     </div>
-                                    <span class="font-mono text-xs text-white font-bold block">Esquema 3D: Poro Estomático &amp; Célula Algal</span>
-                                    <span class="text-[10px] font-mono text-slate-400 block">Nombre: img/1.png</span>
+                                    <div>
+                                        <h5 class="font-tech text-xs font-bold text-white">Escala Subestomática</h5>
+                                        <p class="text-[11px] text-slate-300 leading-snug mt-1 font-normal">
+                                            La célula algal de agua dulce presenta un tamaño natural inferior al poro del estoma (<span class="text-[#FFA928] font-mono font-bold">&lt;1 µm</span> vs 8-15 µm).
+                                        </p>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <ol class="space-y-3 text-xs text-slate-300 font-normal leading-relaxed">
-                                <li class="flex items-start gap-3">
-                                    <span class="w-6 h-6 rounded-full bg-[#F59300]/20 text-[#FFA928] font-mono font-bold flex items-center justify-center shrink-0 text-xs">1</span>
-                                    <span><strong>Dimensión Subestomática Natural:</strong> La célula de microalga de agua dulce Agroplasma es perfectamente compatible con la apertura fisiológica de los estomas foliares.</span>
-                                </li>
-                                <li class="flex items-start gap-3">
-                                    <span class="w-6 h-6 rounded-full bg-[#F59300]/20 text-[#FFA928] font-mono font-bold flex items-center justify-center shrink-0 text-xs">2</span>
-                                    <span><strong>Entrada al Mesófilo Esponjoso:</strong> Tras la pulverización, penetra directamente a las capas esponjosas internas (zonas con aire y solución diluida).</span>
-                                </li>
-                                <li class="flex items-start gap-3">
-                                    <span class="w-6 h-6 rounded-full bg-[#F59300]/20 text-[#FFA928] font-mono font-bold flex items-center justify-center shrink-0 text-xs">3</span>
-                                    <span><strong>Transferencia de Presión:</strong> Inicia el fenómeno de transmisión protoplásmica instantánea hacia los haces vasculares del xilema y floema.</span>
-                                </li>
-                            </ol>
+                                <!-- PASO 2 -->
+                                <div class="p-3.5 rounded-2xl bg-bio-deep border border-bio-border hover:border-[#F59300]/60 transition-all flex flex-col justify-between space-y-2 group">
+                                    <div class="relative w-full h-28 rounded-xl overflow-hidden bg-black/60 border border-white/5 flex items-center justify-center">
+                                        <img src="img/2.png" 
+                                             alt="Paso 2: Entrada al Mesófilo" 
+                                             class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                                             onerror="if(!this.dataset.r){this.dataset.r='1';this.src='2.png';} else {this.onerror=null; this.classList.add('hidden'); document.getElementById('fb-p2').classList.remove('hidden');}">
+                                        <div id="fb-p2" class="hidden text-[10px] font-mono text-slate-400 p-2 text-center">img/2.png</div>
+                                        <span class="absolute top-2 left-2 px-2 py-0.5 rounded-md bg-black/80 backdrop-blur-sm text-[10px] font-mono font-bold text-[#FFA928] border border-[#FFA928]/40">
+                                            PASO 02
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <h5 class="font-tech text-xs font-bold text-white">Entrada al Mesófilo</h5>
+                                        <p class="text-[11px] text-slate-300 leading-snug mt-1 font-normal">
+                                            Penetración instantánea a través del poro hacia los espacios intercelulares esponjosos con medio diluido hipoosmótico.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- PASO 3 -->
+                                <div class="p-3.5 rounded-2xl bg-bio-deep border border-bio-border hover:border-[#F59300]/60 transition-all flex flex-col justify-between space-y-2 group">
+                                    <div class="relative w-full h-28 rounded-xl overflow-hidden bg-black/60 border border-white/5 flex items-center justify-center">
+                                        <img src="img/3.png" 
+                                             alt="Paso 3: Transferencia de Presión" 
+                                             class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                                             onerror="if(!this.dataset.r){this.dataset.r='1';this.src='3.png';} else {this.onerror=null; this.classList.add('hidden'); document.getElementById('fb-p3').classList.remove('hidden');}">
+                                        <div id="fb-p3" class="hidden text-[10px] font-mono text-slate-400 p-2 text-center">img/3.png</div>
+                                        <span class="absolute top-2 left-2 px-2 py-0.5 rounded-md bg-black/80 backdrop-blur-sm text-[10px] font-mono font-bold text-[#FFA928] border border-[#FFA928]/40">
+                                            PASO 03
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <h5 class="font-tech text-xs font-bold text-white">Transferencia de Presión</h5>
+                                        <p class="text-[11px] text-slate-300 leading-snug mt-1 font-normal">
+                                            Iniciación del flujo protoplásmico por gradiente de concentración (Mass Flow) hacia los plasmodesmos vegetales sin consumo de ATP.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- PASO 4 -->
+                                <div class="p-3.5 rounded-2xl bg-bio-deep border border-bio-border hover:border-[#F59300]/60 transition-all flex flex-col justify-between space-y-2 group">
+                                    <div class="relative w-full h-28 rounded-xl overflow-hidden bg-black/60 border border-white/5 flex items-center justify-center">
+                                        <img src="img/4.png" 
+                                             alt="Paso 4: Translocación Sistémica" 
+                                             class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                                             onerror="if(!this.dataset.r){this.dataset.r='1';this.src='4.png';} else {this.onerror=null; this.classList.add('hidden'); document.getElementById('fb-p4').classList.remove('hidden');}">
+                                        <div id="fb-p4" class="hidden text-[10px] font-mono text-slate-400 p-2 text-center">img/4.png</div>
+                                        <span class="absolute top-2 left-2 px-2 py-0.5 rounded-md bg-black/80 backdrop-blur-sm text-[10px] font-mono font-bold text-[#FFA928] border border-[#FFA928]/40">
+                                            PASO 04
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <h5 class="font-tech text-xs font-bold text-white">Translocación Sistémica</h5>
+                                        <p class="text-[11px] text-slate-300 leading-snug mt-1 font-normal">
+                                            Distribución citoplasmática directa hacia los haces vasculares del floema y xilema para nutrición y regeneración celular inmediata.
+                                        </p>
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
-                        <div class="pt-4 border-t border-bio-border text-[11px] font-mono text-[#FFA928] font-bold">
-                            Resultado: 90% asimilado foliarmente en menos de 3 horas.
+
+                        <div class="pt-4 border-t border-bio-border flex items-center justify-between text-[11px] font-mono text-[#FFA928] font-bold">
+                            <span>Resultado Fisiológico:</span>
+                            <span>90% asimilado foliarmente en menos de 3 horas</span>
                         </div>
                     </div>
 
@@ -513,12 +572,12 @@
 
                             <h3 class="font-tech text-2xl font-bold text-white">Transferencia en Suelo &amp; Desbloqueo Mineral</h3>
 
-                            <!-- Imagen de Raíz y Suelo con Fallback y múltiples rutas -->
-                            <div class="relative rounded-2xl overflow-hidden border border-bio-border bg-bio-deep min-h-[200px] flex items-center justify-center group">
+                            <!-- Imagen de Raíz y Suelo Ampliada para que quepa completa -->
+                            <div class="relative rounded-2xl overflow-hidden border border-bio-border bg-black/60 min-h-[300px] sm:min-h-[360px] p-2 flex items-center justify-center group">
                                 <img src="img/tree root.png" 
                                      alt="Desbloqueo de nutrientes en suelo y raíz I.C.E."
-                                     class="w-full h-56 object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                                     onerror="if(!this.dataset.r){this.dataset.r='1';this.src='img/tree root 2.png';} else if(this.dataset.r==='1'){this.dataset.r='2';this.src='img/ice-soil-roots-unlock.jpg';} else {this.onerror=null; this.classList.add('hidden'); document.getElementById('fb-soil-img').classList.remove('hidden');}">
+                                     class="w-full h-72 sm:h-96 object-contain object-center group-hover:scale-[1.02] transition-transform duration-500"
+                                     onerror="if(!this.dataset.r){this.dataset.r='1';this.src='img/tree root 2.png';} else if(this.dataset.r==='1'){this.dataset.r='2';this.src='tree root.png';} else if(this.dataset.r==='2'){this.dataset.r='3';this.src='tree root 2.png';} else if(this.dataset.r==='3'){this.dataset.r='4';this.src='img/ice-soil-roots-unlock.jpg';} else {this.onerror=null; this.classList.add('hidden'); document.getElementById('fb-soil-img').classList.remove('hidden');}">
                                 
                                 <div id="fb-soil-img" class="hidden p-6 text-center space-y-2">
                                     <div class="w-12 h-12 mx-auto rounded-2xl bg-bio-accent/10 border border-bio-accent/30 flex items-center justify-center text-bio-accent">
