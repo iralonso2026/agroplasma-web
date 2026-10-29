@@ -563,84 +563,100 @@
                                 Proceso biológico secuencial desde la gota de pulverización hasta la translocación citoplásmica en los haces conductores:
                             </p>
 
-                            <!-- Cuadrícula interactiva de los 4 Pasos con sus imágenes correspondientes -->
-                            <div class="grid sm:grid-cols-2 gap-3 pt-1">
+                            <!-- Cuadrícula interactiva: Imágenes ajustadas al 100% con texto oculto y visible al pasar el cursor (Hover con difuminado negro) -->
+                            <div class="grid sm:grid-cols-2 gap-3.5 pt-1">
                                 
                                 <!-- PASO 1 -->
-                                <div class="p-3 rounded-2xl bg-bio-deep border border-bio-border hover:border-[#F59300]/60 transition-all flex flex-col justify-between space-y-2 group">
-                                    <div class="relative w-full h-24 sm:h-28 rounded-xl overflow-hidden bg-black/70 border border-white/5 flex items-center justify-center p-1.5">
-                                        <img src="img/1.png" 
-                                             alt="Paso 1: Escala Subestomática" 
-                                             class="w-full h-full object-contain object-center group-hover:scale-105 transition-transform duration-300"
-                                             onerror="if(!this.dataset.r){this.dataset.r='1';this.src='1.png';} else {this.onerror=null; this.classList.add('hidden'); document.getElementById('fb-p1').classList.remove('hidden');}">
-                                        <div id="fb-p1" class="hidden text-[10px] font-mono text-slate-400 p-2 text-center">img/1.png</div>
-                                        <span class="absolute top-1.5 left-1.5 px-2 py-0.5 rounded-md bg-black/80 backdrop-blur-sm text-[9px] font-mono font-bold text-[#FFA928] border border-[#FFA928]/40">
-                                            PASO 01
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <h5 class="font-tech text-xs font-bold text-white">Escala Subestomática</h5>
-                                        <p class="text-[11px] text-slate-300 leading-snug mt-0.5 font-normal">
+                                <div class="relative aspect-[4/3] rounded-2xl overflow-hidden border border-bio-border bg-black group cursor-pointer shadow-lg">
+                                    <!-- Imagen de fondo que llena todo el cuadro -->
+                                    <img src="img/1.png" 
+                                         alt="Paso 1: Escala Subestomática" 
+                                         class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500 ease-out"
+                                         onerror="if(!this.dataset.r){this.dataset.r='1';this.src='1.png';} else {this.onerror=null; this.classList.add('hidden'); document.getElementById('fb-p1').classList.remove('hidden');}">
+                                    <div id="fb-p1" class="hidden absolute inset-0 flex items-center justify-center text-xs font-mono text-slate-400">img/1.png</div>
+                                    
+                                    <!-- Etiqueta visible fija del paso -->
+                                    <span class="absolute top-2.5 left-2.5 z-10 px-2.5 py-1 rounded-lg bg-black/80 backdrop-blur-md text-[10px] font-mono font-bold text-[#FFA928] border border-[#FFA928]/50 shadow-md group-hover:border-[#FFA928]">
+                                        PASO 01
+                                    </span>
+
+                                    <!-- Capa difuminada negra con texto que aparece al pasar el cursor -->
+                                    <div class="absolute inset-0 z-20 bg-gradient-to-t from-black/95 via-black/85 to-black/70 backdrop-blur-[3px] opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col justify-end p-4 text-left">
+                                        <span class="text-[10px] font-mono font-bold text-[#FFA928] uppercase tracking-wider mb-1 block">ETAPA 01</span>
+                                        <h5 class="font-tech text-sm sm:text-base font-extrabold text-white leading-tight">Escala Subestomática</h5>
+                                        <p class="text-xs text-slate-200 leading-snug mt-1.5 font-normal">
                                             La célula algal de agua dulce presenta un tamaño natural inferior al poro del estoma (<span class="text-[#FFA928] font-mono font-bold">&lt;1 µm</span> vs 8-15 µm).
                                         </p>
                                     </div>
                                 </div>
 
                                 <!-- PASO 2 -->
-                                <div class="p-3 rounded-2xl bg-bio-deep border border-bio-border hover:border-[#F59300]/60 transition-all flex flex-col justify-between space-y-2 group">
-                                    <div class="relative w-full h-24 sm:h-28 rounded-xl overflow-hidden bg-black/70 border border-white/5 flex items-center justify-center p-1.5">
-                                        <img src="img/2.png" 
-                                             alt="Paso 2: Entrada al Mesófilo" 
-                                             class="w-full h-full object-contain object-center group-hover:scale-105 transition-transform duration-300"
-                                             onerror="if(!this.dataset.r){this.dataset.r='1';this.src='2.png';} else {this.onerror=null; this.classList.add('hidden'); document.getElementById('fb-p2').classList.remove('hidden');}">
-                                        <div id="fb-p2" class="hidden text-[10px] font-mono text-slate-400 p-2 text-center">img/2.png</div>
-                                        <span class="absolute top-1.5 left-1.5 px-2 py-0.5 rounded-md bg-black/80 backdrop-blur-sm text-[9px] font-mono font-bold text-[#FFA928] border border-[#FFA928]/40">
-                                            PASO 02
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <h5 class="font-tech text-xs font-bold text-white">Entrada al Mesófilo</h5>
-                                        <p class="text-[11px] text-slate-300 leading-snug mt-0.5 font-normal">
+                                <div class="relative aspect-[4/3] rounded-2xl overflow-hidden border border-bio-border bg-black group cursor-pointer shadow-lg">
+                                    <!-- Imagen de fondo que llena todo el cuadro -->
+                                    <img src="img/2.png" 
+                                         alt="Paso 2: Entrada al Mesófilo" 
+                                         class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500 ease-out"
+                                         onerror="if(!this.dataset.r){this.dataset.r='1';this.src='2.png';} else {this.onerror=null; this.classList.add('hidden'); document.getElementById('fb-p2').classList.remove('hidden');}">
+                                    <div id="fb-p2" class="hidden absolute inset-0 flex items-center justify-center text-xs font-mono text-slate-400">img/2.png</div>
+                                    
+                                    <!-- Etiqueta visible fija del paso -->
+                                    <span class="absolute top-2.5 left-2.5 z-10 px-2.5 py-1 rounded-lg bg-black/80 backdrop-blur-md text-[10px] font-mono font-bold text-[#FFA928] border border-[#FFA928]/50 shadow-md group-hover:border-[#FFA928]">
+                                        PASO 02
+                                    </span>
+
+                                    <!-- Capa difuminada negra con texto que aparece al pasar el cursor -->
+                                    <div class="absolute inset-0 z-20 bg-gradient-to-t from-black/95 via-black/85 to-black/70 backdrop-blur-[3px] opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col justify-end p-4 text-left">
+                                        <span class="text-[10px] font-mono font-bold text-[#FFA928] uppercase tracking-wider mb-1 block">ETAPA 02</span>
+                                        <h5 class="font-tech text-sm sm:text-base font-extrabold text-white leading-tight">Entrada al Mesófilo</h5>
+                                        <p class="text-xs text-slate-200 leading-snug mt-1.5 font-normal">
                                             Penetración instantánea a través del poro hacia los espacios intercelulares esponjosos con medio diluido hipoosmótico.
                                         </p>
                                     </div>
                                 </div>
 
                                 <!-- PASO 3 -->
-                                <div class="p-3 rounded-2xl bg-bio-deep border border-bio-border hover:border-[#F59300]/60 transition-all flex flex-col justify-between space-y-2 group">
-                                    <div class="relative w-full h-24 sm:h-28 rounded-xl overflow-hidden bg-black/70 border border-white/5 flex items-center justify-center p-1.5">
-                                        <img src="img/3.png" 
-                                             alt="Paso 3: Transferencia de Presión" 
-                                             class="w-full h-full object-contain object-center group-hover:scale-105 transition-transform duration-300"
-                                             onerror="if(!this.dataset.r){this.dataset.r='1';this.src='3.png';} else {this.onerror=null; this.classList.add('hidden'); document.getElementById('fb-p3').classList.remove('hidden');}">
-                                        <div id="fb-p3" class="hidden text-[10px] font-mono text-slate-400 p-2 text-center">img/3.png</div>
-                                        <span class="absolute top-1.5 left-1.5 px-2 py-0.5 rounded-md bg-black/80 backdrop-blur-sm text-[9px] font-mono font-bold text-[#FFA928] border border-[#FFA928]/40">
-                                            PASO 03
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <h5 class="font-tech text-xs font-bold text-white">Transferencia de Presión</h5>
-                                        <p class="text-[11px] text-slate-300 leading-snug mt-0.5 font-normal">
+                                <div class="relative aspect-[4/3] rounded-2xl overflow-hidden border border-bio-border bg-black group cursor-pointer shadow-lg">
+                                    <!-- Imagen de fondo que llena todo el cuadro -->
+                                    <img src="img/3.png" 
+                                         alt="Paso 3: Transferencia de Presión" 
+                                         class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500 ease-out"
+                                         onerror="if(!this.dataset.r){this.dataset.r='1';this.src='3.png';} else {this.onerror=null; this.classList.add('hidden'); document.getElementById('fb-p3').classList.remove('hidden');}">
+                                    <div id="fb-p3" class="hidden absolute inset-0 flex items-center justify-center text-xs font-mono text-slate-400">img/3.png</div>
+                                    
+                                    <!-- Etiqueta visible fija del paso -->
+                                    <span class="absolute top-2.5 left-2.5 z-10 px-2.5 py-1 rounded-lg bg-black/80 backdrop-blur-md text-[10px] font-mono font-bold text-[#FFA928] border border-[#FFA928]/50 shadow-md group-hover:border-[#FFA928]">
+                                        PASO 03
+                                    </span>
+
+                                    <!-- Capa difuminada negra con texto que aparece al pasar el cursor -->
+                                    <div class="absolute inset-0 z-20 bg-gradient-to-t from-black/95 via-black/85 to-black/70 backdrop-blur-[3px] opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col justify-end p-4 text-left">
+                                        <span class="text-[10px] font-mono font-bold text-[#FFA928] uppercase tracking-wider mb-1 block">ETAPA 03</span>
+                                        <h5 class="font-tech text-sm sm:text-base font-extrabold text-white leading-tight">Transferencia de Presión</h5>
+                                        <p class="text-xs text-slate-200 leading-snug mt-1.5 font-normal">
                                             Iniciación del flujo protoplásmico por gradiente de concentración (Mass Flow) hacia los plasmodesmos vegetales sin consumo de ATP.
                                         </p>
                                     </div>
                                 </div>
 
                                 <!-- PASO 4 -->
-                                <div class="p-3 rounded-2xl bg-bio-deep border border-bio-border hover:border-[#F59300]/60 transition-all flex flex-col justify-between space-y-2 group">
-                                    <div class="relative w-full h-24 sm:h-28 rounded-xl overflow-hidden bg-black/70 border border-white/5 flex items-center justify-center p-1.5">
-                                        <img src="img/4.png" 
-                                             alt="Paso 4: Translocación Sistémica" 
-                                             class="w-full h-full object-contain object-center group-hover:scale-105 transition-transform duration-300"
-                                             onerror="if(!this.dataset.r){this.dataset.r='1';this.src='4.png';} else {this.onerror=null; this.classList.add('hidden'); document.getElementById('fb-p4').classList.remove('hidden');}">
-                                        <div id="fb-p4" class="hidden text-[10px] font-mono text-slate-400 p-2 text-center">img/4.png</div>
-                                        <span class="absolute top-1.5 left-1.5 px-2 py-0.5 rounded-md bg-black/80 backdrop-blur-sm text-[9px] font-mono font-bold text-[#FFA928] border border-[#FFA928]/40">
-                                            PASO 04
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <h5 class="font-tech text-xs font-bold text-white">Translocación Sistémica</h5>
-                                        <p class="text-[11px] text-slate-300 leading-snug mt-0.5 font-normal">
+                                <div class="relative aspect-[4/3] rounded-2xl overflow-hidden border border-bio-border bg-black group cursor-pointer shadow-lg">
+                                    <!-- Imagen de fondo que llena todo el cuadro -->
+                                    <img src="img/4.png" 
+                                         alt="Paso 4: Translocación Sistémica" 
+                                         class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500 ease-out"
+                                         onerror="if(!this.dataset.r){this.dataset.r='1';this.src='4.png';} else {this.onerror=null; this.classList.add('hidden'); document.getElementById('fb-p4').classList.remove('hidden');}">
+                                    <div id="fb-p4" class="hidden absolute inset-0 flex items-center justify-center text-xs font-mono text-slate-400">img/4.png</div>
+                                    
+                                    <!-- Etiqueta visible fija del paso -->
+                                    <span class="absolute top-2.5 left-2.5 z-10 px-2.5 py-1 rounded-lg bg-black/80 backdrop-blur-md text-[10px] font-mono font-bold text-[#FFA928] border border-[#FFA928]/50 shadow-md group-hover:border-[#FFA928]">
+                                        PASO 04
+                                    </span>
+
+                                    <!-- Capa difuminada negra con texto que aparece al pasar el cursor -->
+                                    <div class="absolute inset-0 z-20 bg-gradient-to-t from-black/95 via-black/85 to-black/70 backdrop-blur-[3px] opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col justify-end p-4 text-left">
+                                        <span class="text-[10px] font-mono font-bold text-[#FFA928] uppercase tracking-wider mb-1 block">ETAPA 04</span>
+                                        <h5 class="font-tech text-sm sm:text-base font-extrabold text-white leading-tight">Translocación Sistémica</h5>
+                                        <p class="text-xs text-slate-200 leading-snug mt-1.5 font-normal">
                                             Distribución citoplasmática directa hacia los haces vasculares del floema y xilema para nutrición y regeneración celular inmediata.
                                         </p>
                                     </div>
