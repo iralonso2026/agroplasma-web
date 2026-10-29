@@ -125,10 +125,10 @@
             
             <!-- Logo Corporativo -->
             <a href="javascript:void(0)" onclick="showSection('inicio')" class="flex items-center gap-3 group">
-                <img src="logo-agroplasma.png" 
+                <img src="img/logo agroplasma.png" 
                      alt="Agroplasma" 
                      class="h-10 sm:h-11 w-auto object-contain"
-                     onerror="this.onerror=null; this.classList.add('hidden'); document.getElementById('header-logo-fallback').classList.remove('hidden');">
+                     onerror="if(!this.dataset.r1){this.dataset.r1='1';this.src='logo agroplasma.png';} else if(this.dataset.r1==='1'){this.dataset.r1='2';this.src='img/logo-agroplasma.png';} else if(this.dataset.r1==='2'){this.dataset.r1='3';this.src='logo-agroplasma.png';} else {this.onerror=null; this.classList.add('hidden'); document.getElementById('header-logo-fallback').classList.remove('hidden');}">
                 
                 <div id="header-logo-fallback" class="hidden flex items-center font-tech text-2xl font-black tracking-tight">
                     <span class="text-[#F59300]">Agro</span><span class="text-bio-accent">plasma</span>
@@ -250,7 +250,9 @@
                                        muted 
                                        playsinline 
                                        preload="auto"
-                                       poster="img/ice-foliar-penetration.jpg">
+                                       poster="img/1.png">
+                                    <source src="foliar penetration dynamics.mp4" type="video/mp4">
+                                    <source src="foliar_penetration_dynamics.mp4" type="video/mp4">
                                     <source src="video-ice-foliar.mp4" type="video/mp4">
                                     <source src="video/video-ice-foliar.mp4" type="video/mp4">
                                     Tu navegador no soporta reproducción de vídeo HTML5.
@@ -463,19 +465,19 @@
 
                             <h3 class="font-tech text-2xl font-bold text-white">Dinámica de Penetración Foliar</h3>
 
-                            <!-- Imagen de Penetración Foliar con Fallback -->
+                            <!-- Imagen de Penetración Foliar con Fallback y múltiples rutas -->
                             <div class="relative rounded-2xl overflow-hidden border border-bio-border bg-bio-deep min-h-[200px] flex items-center justify-center group">
-                                <img src="img/ice-foliar-penetration.jpg" 
+                                <img src="img/1.png" 
                                      alt="Penetración foliar por estomas I.C.E."
                                      class="w-full h-56 object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                                     onerror="this.onerror=null; this.classList.add('hidden'); document.getElementById('fb-foliar-img').classList.remove('hidden');">
+                                     onerror="if(!this.dataset.r){this.dataset.r='1';this.src='img/2.png';} else if(this.dataset.r==='1'){this.dataset.r='2';this.src='img/3.png';} else if(this.dataset.r==='2'){this.dataset.r='3';this.src='img/ice-foliar-penetration.jpg';} else {this.onerror=null; this.classList.add('hidden'); document.getElementById('fb-foliar-img').classList.remove('hidden');}">
                                 
                                 <div id="fb-foliar-img" class="hidden p-6 text-center space-y-2">
                                     <div class="w-12 h-12 mx-auto rounded-2xl bg-[#F59300]/10 border border-[#F59300]/30 flex items-center justify-center text-[#FFA928]">
                                         <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
                                     </div>
                                     <span class="font-mono text-xs text-white font-bold block">Esquema 3D: Poro Estomático &amp; Célula Algal</span>
-                                    <span class="text-[10px] font-mono text-slate-400 block">Sube: img/ice-foliar-penetration.jpg</span>
+                                    <span class="text-[10px] font-mono text-slate-400 block">Nombre: img/1.png</span>
                                 </div>
                             </div>
 
@@ -511,19 +513,19 @@
 
                             <h3 class="font-tech text-2xl font-bold text-white">Transferencia en Suelo &amp; Desbloqueo Mineral</h3>
 
-                            <!-- Imagen de Raíz y Suelo con Fallback -->
+                            <!-- Imagen de Raíz y Suelo con Fallback y múltiples rutas -->
                             <div class="relative rounded-2xl overflow-hidden border border-bio-border bg-bio-deep min-h-[200px] flex items-center justify-center group">
-                                <img src="img/ice-soil-roots-unlock.jpg" 
+                                <img src="img/tree root.png" 
                                      alt="Desbloqueo de nutrientes en suelo y raíz I.C.E."
                                      class="w-full h-56 object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                                     onerror="this.onerror=null; this.classList.add('hidden'); document.getElementById('fb-soil-img').classList.remove('hidden');">
+                                     onerror="if(!this.dataset.r){this.dataset.r='1';this.src='img/tree root 2.png';} else if(this.dataset.r==='1'){this.dataset.r='2';this.src='img/ice-soil-roots-unlock.jpg';} else {this.onerror=null; this.classList.add('hidden'); document.getElementById('fb-soil-img').classList.remove('hidden');}">
                                 
                                 <div id="fb-soil-img" class="hidden p-6 text-center space-y-2">
                                     <div class="w-12 h-12 mx-auto rounded-2xl bg-bio-accent/10 border border-bio-accent/30 flex items-center justify-center text-bio-accent">
                                         <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
                                     </div>
                                     <span class="font-mono text-xs text-white font-bold block">Esquema: Desbloqueo de Fósforo y Calcio en Rizosfera</span>
-                                    <span class="text-[10px] font-mono text-slate-400 block">Sube: img/ice-soil-roots-unlock.jpg</span>
+                                    <span class="text-[10px] font-mono text-slate-400 block">Nombre: img/tree root.png</span>
                                 </div>
                             </div>
 
@@ -641,13 +643,13 @@
                     <div class="grid md:grid-cols-3 gap-8">
                         <div class="glass-panel rounded-3xl overflow-hidden border border-bio-border flex flex-col justify-between">
                             <div class="relative bg-bio-deep min-h-[160px] flex items-center justify-center">
-                                <img src="img/app-flood-irrigation.jpg" 
+                                <img src="img/flooding.png" 
                                      alt="Riego por inundación I.C.E."
                                      class="w-full h-44 object-cover"
-                                     onerror="this.onerror=null; this.classList.add('hidden'); document.getElementById('fb-flood').classList.remove('hidden');">
+                                     onerror="if(!this.dataset.r){this.dataset.r='1';this.src='img/app-flood-irrigation.jpg';} else {this.onerror=null; this.classList.add('hidden'); document.getElementById('fb-flood').classList.remove('hidden');}">
                                 <div id="fb-flood" class="hidden p-4 text-center font-mono text-xs text-slate-400">
                                     <span class="text-[#FFA928] block font-bold">Riego a Manta / Inundación</span>
-                                    <span>Sube: img/app-flood-irrigation.jpg</span>
+                                    <span>img/flooding.png</span>
                                 </div>
                             </div>
                             <div class="p-6 space-y-2">
@@ -660,13 +662,13 @@
 
                         <div class="glass-panel rounded-3xl overflow-hidden border border-bio-border flex flex-col justify-between">
                             <div class="relative bg-bio-deep min-h-[160px] flex items-center justify-center">
-                                <img src="img/app-drip-irrigation.jpg" 
+                                <img src="img/drip.png" 
                                      alt="Riego por goteo localizado I.C.E."
                                      class="w-full h-44 object-cover"
-                                     onerror="this.onerror=null; this.classList.add('hidden'); document.getElementById('fb-drip').classList.remove('hidden');">
+                                     onerror="if(!this.dataset.r){this.dataset.r='1';this.src='img/app-drip-irrigation.jpg';} else {this.onerror=null; this.classList.add('hidden'); document.getElementById('fb-drip').classList.remove('hidden');}">
                                 <div id="fb-drip" class="hidden p-4 text-center font-mono text-xs text-slate-400">
                                     <span class="text-bio-cyan block font-bold">Riego por Goteo Localizado</span>
-                                    <span>Sube: img/app-drip-irrigation.jpg</span>
+                                    <span>img/drip.png</span>
                                 </div>
                             </div>
                             <div class="p-6 space-y-2">
@@ -682,13 +684,13 @@
 
                         <div class="glass-panel rounded-3xl overflow-hidden border border-bio-border flex flex-col justify-between">
                             <div class="relative bg-bio-deep min-h-[160px] flex items-center justify-center">
-                                <img src="img/app-foliar-spray.jpg" 
+                                <img src="img/foliar.png" 
                                      alt="Pulverización foliar I.C.E."
                                      class="w-full h-44 object-cover"
-                                     onerror="this.onerror=null; this.classList.add('hidden'); document.getElementById('fb-foliar').classList.remove('hidden');">
+                                     onerror="if(!this.dataset.r){this.dataset.r='1';this.src='img/app-foliar-spray.jpg';} else {this.onerror=null; this.classList.add('hidden'); document.getElementById('fb-foliar').classList.remove('hidden');}">
                                 <div id="fb-foliar" class="hidden p-4 text-center font-mono text-xs text-slate-400">
                                     <span class="text-bio-accent block font-bold">Pulverización Foliar</span>
-                                    <span>Sube: img/app-foliar-spray.jpg</span>
+                                    <span>img/foliar.png</span>
                                 </div>
                             </div>
                             <div class="p-6 space-y-2">
@@ -1097,10 +1099,10 @@
                 
                 <div class="space-y-4 md:col-span-1">
                     <div class="flex items-center">
-                        <img src="logo-agroplasma.png" 
+                        <img src="img/logo agroplasma.png" 
                              alt="Agroplasma" 
                              class="h-9 w-auto object-contain"
-                             onerror="this.onerror=null; this.classList.add('hidden'); document.getElementById('footer-logo-fallback').classList.remove('hidden');">
+                             onerror="if(!this.dataset.r1){this.dataset.r1='1';this.src='logo agroplasma.png';} else if(this.dataset.r1==='1'){this.dataset.r1='2';this.src='img/logo-agroplasma.png';} else {this.onerror=null; this.classList.add('hidden'); document.getElementById('footer-logo-fallback').classList.remove('hidden');}">
                         
                         <div id="footer-logo-fallback" class="hidden flex items-center font-tech text-xl font-black tracking-tight">
                             <span class="text-[#F59300]">Agro</span><span class="text-bio-accent">plasma</span>
