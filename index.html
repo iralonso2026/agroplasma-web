@@ -123,14 +123,14 @@
     <header class="sticky top-0 z-40 glass-header no-print">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             
-            <!-- Logo Corporativo -->
+            <!-- Logo Corporativo (+30% de tamaño) -->
             <a href="javascript:void(0)" onclick="showSection('inicio')" class="flex items-center gap-3 group">
                 <img src="img/logo agroplasma.png" 
                      alt="Agroplasma" 
-                     class="h-10 sm:h-11 w-auto object-contain"
+                     class="h-[52px] sm:h-[58px] w-auto object-contain transition-transform group-hover:scale-105"
                      onerror="if(!this.dataset.r1){this.dataset.r1='1';this.src='logo agroplasma.png';} else if(this.dataset.r1==='1'){this.dataset.r1='2';this.src='img/logo-agroplasma.png';} else if(this.dataset.r1==='2'){this.dataset.r1='3';this.src='logo-agroplasma.png';} else {this.onerror=null; this.classList.add('hidden'); document.getElementById('header-logo-fallback').classList.remove('hidden');}">
                 
-                <div id="header-logo-fallback" class="hidden flex items-center font-tech text-2xl font-black tracking-tight">
+                <div id="header-logo-fallback" class="hidden flex items-center font-tech text-3xl font-black tracking-tight">
                     <span class="text-[#F59300]">Agro</span><span class="text-bio-accent">plasma</span>
                 </div>
             </a>
@@ -151,6 +151,76 @@
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                 </button>
 
+                <!-- Selector de Idioma (6 Idiomas Oficiales Agroplasma) -->
+                <div class="relative">
+                    <button id="langDropdownBtn" onclick="toggleLangDropdown()" class="flex items-center gap-2 px-3 py-2 rounded-xl bg-bio-surface hover:bg-bio-dark text-slate-200 border border-bio-border font-mono text-xs font-bold transition-all shadow-sm">
+                        <span class="text-sm">🇪🇸</span>
+                        <span>ES</span>
+                        <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+
+                    <!-- Menú Desplegable de los 6 Idiomas -->
+                    <div id="langDropdownMenu" class="hidden absolute right-0 mt-2 w-52 rounded-2xl glass-panel border border-bio-border bg-bio-deep/95 shadow-2xl py-2 z-50 font-mono text-xs divide-y divide-bio-border/40">
+                        <div class="px-3.5 py-1 text-[10px] text-slate-400 font-bold uppercase tracking-wider">
+                            Seleccionar Idioma
+                        </div>
+
+                        <!-- 1. Español (Activo) -->
+                        <a href="index.html" class="w-full px-3.5 py-2 text-left flex items-center justify-between bg-bio-surface/80 text-bio-accent font-bold hover:bg-bio-surface transition-colors">
+                            <span class="flex items-center gap-2.5">
+                                <span class="text-sm">🇪🇸</span>
+                                <span>Español</span>
+                            </span>
+                            <span class="text-[9px] bg-bio-accent/20 text-bio-accent px-1.5 py-0.5 rounded font-bold">Activo</span>
+                        </a>
+
+                        <!-- 2. Inglés -->
+                        <a href="en.html" class="w-full px-3.5 py-2 text-left flex items-center justify-between text-slate-300 hover:text-white hover:bg-bio-surface transition-colors">
+                            <span class="flex items-center gap-2.5">
+                                <span class="text-sm">🇬🇧</span>
+                                <span>English</span>
+                            </span>
+                            <span class="text-[9px] text-slate-400">EN</span>
+                        </a>
+
+                        <!-- 3. Francés -->
+                        <a href="fr.html" class="w-full px-3.5 py-2 text-left flex items-center justify-between text-slate-300 hover:text-white hover:bg-bio-surface transition-colors">
+                            <span class="flex items-center gap-2.5">
+                                <span class="text-sm">🇫🇷</span>
+                                <span>Français</span>
+                            </span>
+                            <span class="text-[9px] text-slate-400">FR</span>
+                        </a>
+
+                        <!-- 4. Portugués -->
+                        <a href="pt.html" class="w-full px-3.5 py-2 text-left flex items-center justify-between text-slate-300 hover:text-white hover:bg-bio-surface transition-colors">
+                            <span class="flex items-center gap-2.5">
+                                <span class="text-sm">🇵🇹</span>
+                                <span>Português</span>
+                            </span>
+                            <span class="text-[9px] text-slate-400">PT</span>
+                        </a>
+
+                        <!-- 5. Árabe -->
+                        <a href="ar.html" class="w-full px-3.5 py-2 text-left flex items-center justify-between text-slate-300 hover:text-white hover:bg-bio-surface transition-colors">
+                            <span class="flex items-center gap-2.5">
+                                <span class="text-sm">🇸🇦</span>
+                                <span>العربية</span>
+                            </span>
+                            <span class="text-[9px] text-slate-400">AR</span>
+                        </a>
+
+                        <!-- 6. Hindi -->
+                        <a href="hi.html" class="w-full px-3.5 py-2 text-left flex items-center justify-between text-slate-300 hover:text-white hover:bg-bio-surface transition-colors">
+                            <span class="flex items-center gap-2.5">
+                                <span class="text-sm">🇮🇳</span>
+                                <span>हिन्दी</span>
+                            </span>
+                            <span class="text-[9px] text-slate-400">HI</span>
+                        </a>
+                    </div>
+                </div>
+
                 <!-- Botón Menú Móvil -->
                 <button onclick="toggleMobileMenu()" class="lg:hidden p-2 rounded-xl text-slate-200 hover:text-white bg-bio-surface border border-bio-border">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/></svg>
@@ -166,6 +236,31 @@
             <button onclick="showSection('nosotros'); toggleMobileMenu();" class="block w-full text-left py-2 hover:text-bio-accent uppercase">QUIÉNES SOMOS & FÁBRICA</button>
             <button onclick="showSection('blog'); toggleMobileMenu();" class="block w-full text-left py-2 hover:text-bio-accent uppercase">ENSAYOS TÉCNICOS & BLOG</button>
             <button onclick="showSection('contacto'); toggleMobileMenu();" class="block w-full text-left py-2 hover:text-bio-accent uppercase">CONTACTO B2B</button>
+            
+            <!-- Selector de los 6 idiomas para vista móvil -->
+            <div class="pt-4 border-t border-bio-border space-y-2">
+                <span class="text-[10px] font-mono text-slate-400 block uppercase">Idioma / Language:</span>
+                <div class="grid grid-cols-3 gap-1.5 font-mono text-xs">
+                    <a href="index.html" class="px-2.5 py-1.5 rounded-lg bg-bio-surface text-bio-accent font-bold border border-bio-accent/40 text-center flex items-center justify-center gap-1">
+                        <span>🇪🇸</span> <span>ES</span>
+                    </a>
+                    <a href="en.html" class="px-2.5 py-1.5 rounded-lg bg-bio-surface text-slate-300 hover:text-white border border-bio-border text-center flex items-center justify-center gap-1">
+                        <span>🇬🇧</span> <span>EN</span>
+                    </a>
+                    <a href="fr.html" class="px-2.5 py-1.5 rounded-lg bg-bio-surface text-slate-300 hover:text-white border border-bio-border text-center flex items-center justify-center gap-1">
+                        <span>🇫🇷</span> <span>FR</span>
+                    </a>
+                    <a href="pt.html" class="px-2.5 py-1.5 rounded-lg bg-bio-surface text-slate-300 hover:text-white border border-bio-border text-center flex items-center justify-center gap-1">
+                        <span>🇵🇹</span> <span>PT</span>
+                    </a>
+                    <a href="ar.html" class="px-2.5 py-1.5 rounded-lg bg-bio-surface text-slate-300 hover:text-white border border-bio-border text-center flex items-center justify-center gap-1">
+                        <span>🇸🇦</span> <span>AR</span>
+                    </a>
+                    <a href="hi.html" class="px-2.5 py-1.5 rounded-lg bg-bio-surface text-slate-300 hover:text-white border border-bio-border text-center flex items-center justify-center gap-1">
+                        <span>🇮🇳</span> <span>HI</span>
+                    </a>
+                </div>
+            </div>
         </div>
     </header>
 
@@ -469,83 +564,83 @@
                             </p>
 
                             <!-- Cuadrícula interactiva de los 4 Pasos con sus imágenes correspondientes -->
-                            <div class="grid sm:grid-cols-2 gap-3.5 pt-2">
+                            <div class="grid sm:grid-cols-2 gap-3 pt-1">
                                 
                                 <!-- PASO 1 -->
-                                <div class="p-3.5 rounded-2xl bg-bio-deep border border-bio-border hover:border-[#F59300]/60 transition-all flex flex-col justify-between space-y-2 group">
-                                    <div class="relative w-full h-28 rounded-xl overflow-hidden bg-black/60 border border-white/5 flex items-center justify-center">
+                                <div class="p-3 rounded-2xl bg-bio-deep border border-bio-border hover:border-[#F59300]/60 transition-all flex flex-col justify-between space-y-2 group">
+                                    <div class="relative w-full h-24 sm:h-28 rounded-xl overflow-hidden bg-black/70 border border-white/5 flex items-center justify-center p-1.5">
                                         <img src="img/1.png" 
                                              alt="Paso 1: Escala Subestomática" 
-                                             class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                                             class="w-full h-full object-contain object-center group-hover:scale-105 transition-transform duration-300"
                                              onerror="if(!this.dataset.r){this.dataset.r='1';this.src='1.png';} else {this.onerror=null; this.classList.add('hidden'); document.getElementById('fb-p1').classList.remove('hidden');}">
                                         <div id="fb-p1" class="hidden text-[10px] font-mono text-slate-400 p-2 text-center">img/1.png</div>
-                                        <span class="absolute top-2 left-2 px-2 py-0.5 rounded-md bg-black/80 backdrop-blur-sm text-[10px] font-mono font-bold text-[#FFA928] border border-[#FFA928]/40">
+                                        <span class="absolute top-1.5 left-1.5 px-2 py-0.5 rounded-md bg-black/80 backdrop-blur-sm text-[9px] font-mono font-bold text-[#FFA928] border border-[#FFA928]/40">
                                             PASO 01
                                         </span>
                                     </div>
                                     <div>
                                         <h5 class="font-tech text-xs font-bold text-white">Escala Subestomática</h5>
-                                        <p class="text-[11px] text-slate-300 leading-snug mt-1 font-normal">
+                                        <p class="text-[11px] text-slate-300 leading-snug mt-0.5 font-normal">
                                             La célula algal de agua dulce presenta un tamaño natural inferior al poro del estoma (<span class="text-[#FFA928] font-mono font-bold">&lt;1 µm</span> vs 8-15 µm).
                                         </p>
                                     </div>
                                 </div>
 
                                 <!-- PASO 2 -->
-                                <div class="p-3.5 rounded-2xl bg-bio-deep border border-bio-border hover:border-[#F59300]/60 transition-all flex flex-col justify-between space-y-2 group">
-                                    <div class="relative w-full h-28 rounded-xl overflow-hidden bg-black/60 border border-white/5 flex items-center justify-center">
+                                <div class="p-3 rounded-2xl bg-bio-deep border border-bio-border hover:border-[#F59300]/60 transition-all flex flex-col justify-between space-y-2 group">
+                                    <div class="relative w-full h-24 sm:h-28 rounded-xl overflow-hidden bg-black/70 border border-white/5 flex items-center justify-center p-1.5">
                                         <img src="img/2.png" 
                                              alt="Paso 2: Entrada al Mesófilo" 
-                                             class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                                             class="w-full h-full object-contain object-center group-hover:scale-105 transition-transform duration-300"
                                              onerror="if(!this.dataset.r){this.dataset.r='1';this.src='2.png';} else {this.onerror=null; this.classList.add('hidden'); document.getElementById('fb-p2').classList.remove('hidden');}">
                                         <div id="fb-p2" class="hidden text-[10px] font-mono text-slate-400 p-2 text-center">img/2.png</div>
-                                        <span class="absolute top-2 left-2 px-2 py-0.5 rounded-md bg-black/80 backdrop-blur-sm text-[10px] font-mono font-bold text-[#FFA928] border border-[#FFA928]/40">
+                                        <span class="absolute top-1.5 left-1.5 px-2 py-0.5 rounded-md bg-black/80 backdrop-blur-sm text-[9px] font-mono font-bold text-[#FFA928] border border-[#FFA928]/40">
                                             PASO 02
                                         </span>
                                     </div>
                                     <div>
                                         <h5 class="font-tech text-xs font-bold text-white">Entrada al Mesófilo</h5>
-                                        <p class="text-[11px] text-slate-300 leading-snug mt-1 font-normal">
+                                        <p class="text-[11px] text-slate-300 leading-snug mt-0.5 font-normal">
                                             Penetración instantánea a través del poro hacia los espacios intercelulares esponjosos con medio diluido hipoosmótico.
                                         </p>
                                     </div>
                                 </div>
 
                                 <!-- PASO 3 -->
-                                <div class="p-3.5 rounded-2xl bg-bio-deep border border-bio-border hover:border-[#F59300]/60 transition-all flex flex-col justify-between space-y-2 group">
-                                    <div class="relative w-full h-28 rounded-xl overflow-hidden bg-black/60 border border-white/5 flex items-center justify-center">
+                                <div class="p-3 rounded-2xl bg-bio-deep border border-bio-border hover:border-[#F59300]/60 transition-all flex flex-col justify-between space-y-2 group">
+                                    <div class="relative w-full h-24 sm:h-28 rounded-xl overflow-hidden bg-black/70 border border-white/5 flex items-center justify-center p-1.5">
                                         <img src="img/3.png" 
                                              alt="Paso 3: Transferencia de Presión" 
-                                             class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                                             class="w-full h-full object-contain object-center group-hover:scale-105 transition-transform duration-300"
                                              onerror="if(!this.dataset.r){this.dataset.r='1';this.src='3.png';} else {this.onerror=null; this.classList.add('hidden'); document.getElementById('fb-p3').classList.remove('hidden');}">
                                         <div id="fb-p3" class="hidden text-[10px] font-mono text-slate-400 p-2 text-center">img/3.png</div>
-                                        <span class="absolute top-2 left-2 px-2 py-0.5 rounded-md bg-black/80 backdrop-blur-sm text-[10px] font-mono font-bold text-[#FFA928] border border-[#FFA928]/40">
+                                        <span class="absolute top-1.5 left-1.5 px-2 py-0.5 rounded-md bg-black/80 backdrop-blur-sm text-[9px] font-mono font-bold text-[#FFA928] border border-[#FFA928]/40">
                                             PASO 03
                                         </span>
                                     </div>
                                     <div>
                                         <h5 class="font-tech text-xs font-bold text-white">Transferencia de Presión</h5>
-                                        <p class="text-[11px] text-slate-300 leading-snug mt-1 font-normal">
+                                        <p class="text-[11px] text-slate-300 leading-snug mt-0.5 font-normal">
                                             Iniciación del flujo protoplásmico por gradiente de concentración (Mass Flow) hacia los plasmodesmos vegetales sin consumo de ATP.
                                         </p>
                                     </div>
                                 </div>
 
                                 <!-- PASO 4 -->
-                                <div class="p-3.5 rounded-2xl bg-bio-deep border border-bio-border hover:border-[#F59300]/60 transition-all flex flex-col justify-between space-y-2 group">
-                                    <div class="relative w-full h-28 rounded-xl overflow-hidden bg-black/60 border border-white/5 flex items-center justify-center">
+                                <div class="p-3 rounded-2xl bg-bio-deep border border-bio-border hover:border-[#F59300]/60 transition-all flex flex-col justify-between space-y-2 group">
+                                    <div class="relative w-full h-24 sm:h-28 rounded-xl overflow-hidden bg-black/70 border border-white/5 flex items-center justify-center p-1.5">
                                         <img src="img/4.png" 
                                              alt="Paso 4: Translocación Sistémica" 
-                                             class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                                             class="w-full h-full object-contain object-center group-hover:scale-105 transition-transform duration-300"
                                              onerror="if(!this.dataset.r){this.dataset.r='1';this.src='4.png';} else {this.onerror=null; this.classList.add('hidden'); document.getElementById('fb-p4').classList.remove('hidden');}">
                                         <div id="fb-p4" class="hidden text-[10px] font-mono text-slate-400 p-2 text-center">img/4.png</div>
-                                        <span class="absolute top-2 left-2 px-2 py-0.5 rounded-md bg-black/80 backdrop-blur-sm text-[10px] font-mono font-bold text-[#FFA928] border border-[#FFA928]/40">
+                                        <span class="absolute top-1.5 left-1.5 px-2 py-0.5 rounded-md bg-black/80 backdrop-blur-sm text-[9px] font-mono font-bold text-[#FFA928] border border-[#FFA928]/40">
                                             PASO 04
                                         </span>
                                     </div>
                                     <div>
                                         <h5 class="font-tech text-xs font-bold text-white">Translocación Sistémica</h5>
-                                        <p class="text-[11px] text-slate-300 leading-snug mt-1 font-normal">
+                                        <p class="text-[11px] text-slate-300 leading-snug mt-0.5 font-normal">
                                             Distribución citoplasmática directa hacia los haces vasculares del floema y xilema para nutrición y regeneración celular inmediata.
                                         </p>
                                     </div>
@@ -1085,20 +1180,153 @@
                                 <div>
                                     <label class="block text-xs font-mono text-slate-300 font-bold mb-1.5">Teléfono / WhatsApp *</label>
                                     <div class="flex gap-1.5 items-center">
-                                        <select id="formCountryCode" class="w-24 px-1.5 py-3 rounded-xl bg-bio-surface border border-bio-border text-slate-100 text-[11px] font-mono focus:outline-none focus:border-bio-accent shrink-0 cursor-pointer text-center">
-                                            <option value="+34" selected class="bg-bio-deep">🇪🇸 +34</option>
-                                            <option value="+1" class="bg-bio-deep">🇺🇸 +1</option>
-                                            <option value="+52" class="bg-bio-deep">🇲🇽 +52</option>
-                                            <option value="+54" class="bg-bio-deep">🇦🇷 +54</option>
-                                            <option value="+56" class="bg-bio-deep">🇨🇱 +56</option>
-                                            <option value="+57" class="bg-bio-deep">🇨🇴 +57</option>
-                                            <option value="+51" class="bg-bio-deep">🇵🇪 +51</option>
-                                            <option value="+33" class="bg-bio-deep">🇫🇷 +33</option>
-                                            <option value="+39" class="bg-bio-deep">🇮🇹 +39</option>
-                                            <option value="+49" class="bg-bio-deep">🇩🇪 +49</option>
-                                            <option value="+30" class="bg-bio-deep">🇬🇷 +30</option>
-                                            <option value="+90" class="bg-bio-deep">🇹🇷 +90</option>
-                                            <option value="+212" class="bg-bio-deep">🇲🇦 +212</option>
+                                        <select id="formCountryCode" class="w-32 sm:w-36 px-2 py-3 rounded-xl bg-bio-surface border border-bio-border text-slate-100 text-[11px] font-mono focus:outline-none focus:border-bio-accent shrink-0 cursor-pointer">
+                                            <option value="+34" selected class="bg-bio-deep">🇪🇸 España (+34)</option>
+                                            <option value="+93" class="bg-bio-deep">🇦🇫 Afganistán (+93)</option>
+                                            <option value="+355" class="bg-bio-deep">🇦🇱 Albania (+355)</option>
+                                            <option value="+49" class="bg-bio-deep">🇩🇪 Alemania (+49)</option>
+                                            <option value="+376" class="bg-bio-deep">🇦🇩 Andorra (+376)</option>
+                                            <option value="+244" class="bg-bio-deep">🇦🇴 Angola (+244)</option>
+                                            <option value="+966" class="bg-bio-deep">🇸🇦 Arabia Saudí (+966)</option>
+                                            <option value="+213" class="bg-bio-deep">🇩🇿 Argelia (+213)</option>
+                                            <option value="+54" class="bg-bio-deep">🇦🇷 Argentina (+54)</option>
+                                            <option value="+374" class="bg-bio-deep">🇦🇲 Armenia (+374)</option>
+                                            <option value="+61" class="bg-bio-deep">🇦🇺 Australia (+61)</option>
+                                            <option value="+43" class="bg-bio-deep">🇦🇹 Austria (+43)</option>
+                                            <option value="+994" class="bg-bio-deep">🇦🇿 Azerbaiyán (+994)</option>
+                                            <option value="+1242" class="bg-bio-deep">🇧🇸 Bahamas (+1242)</option>
+                                            <option value="+880" class="bg-bio-deep">🇧🇩 Bangladés (+880)</option>
+                                            <option value="+1246" class="bg-bio-deep">🇧🇧 Barbados (+1246)</option>
+                                            <option value="+973" class="bg-bio-deep">🇧🇭 Baréin (+973)</option>
+                                            <option value="+32" class="bg-bio-deep">🇧🇪 Bélgica (+32)</option>
+                                            <option value="+501" class="bg-bio-deep">🇧🇿 Belice (+501)</option>
+                                            <option value="+229" class="bg-bio-deep">🇧🇯 Benín (+229)</option>
+                                            <option value="+591" class="bg-bio-deep">🇧🇴 Bolivia (+591)</option>
+                                            <option value="+387" class="bg-bio-deep">🇧🇦 Bosnia y Herzegovina (+387)</option>
+                                            <option value="+267" class="bg-bio-deep">🇧🇼 Botsuana (+267)</option>
+                                            <option value="+55" class="bg-bio-deep">🇧🇷 Brasil (+55)</option>
+                                            <option value="+673" class="bg-bio-deep">🇧🇳 Brunéi (+673)</option>
+                                            <option value="+359" class="bg-bio-deep">🇧🇬 Bulgaria (+359)</option>
+                                            <option value="+226" class="bg-bio-deep">🇧🇫 Burkina Faso (+226)</option>
+                                            <option value="+257" class="bg-bio-deep">🇧🇮 Burundi (+257)</option>
+                                            <option value="+975" class="bg-bio-deep">🇧🇹 Bután (+975)</option>
+                                            <option value="+238" class="bg-bio-deep">🇨🇻 Cabo Verde (+238)</option>
+                                            <option value="+855" class="bg-bio-deep">🇰🇭 Camboya (+855)</option>
+                                            <option value="+237" class="bg-bio-deep">🇨🇲 Camerún (+237)</option>
+                                            <option value="+1" class="bg-bio-deep">🇨🇦 Canadá (+1)</option>
+                                            <option value="+974" class="bg-bio-deep">🇶🇦 Catar (+974)</option>
+                                            <option value="+235" class="bg-bio-deep">🇹🇩 Chad (+235)</option>
+                                            <option value="+56" class="bg-bio-deep">🇨🇱 Chile (+56)</option>
+                                            <option value="+86" class="bg-bio-deep">🇨🇳 China (+86)</option>
+                                            <option value="+357" class="bg-bio-deep">🇨🇾 Chipre (+357)</option>
+                                            <option value="+57" class="bg-bio-deep">🇨🇴 Colombia (+57)</option>
+                                            <option value="+269" class="bg-bio-deep">🇰🇲 Comoras (+269)</option>
+                                            <option value="+82" class="bg-bio-deep">🇰🇷 Corea del Sur (+82)</option>
+                                            <option value="+225" class="bg-bio-deep">🇨🇮 Costa de Marfil (+225)</option>
+                                            <option value="+506" class="bg-bio-deep">🇨🇷 Costa Rica (+506)</option>
+                                            <option value="+385" class="bg-bio-deep">🇭🇷 Croacia (+385)</option>
+                                            <option value="+53" class="bg-bio-deep">🇨🇺 Cuba (+53)</option>
+                                            <option value="+45" class="bg-bio-deep">🇩🇰 Dinamarca (+45)</option>
+                                            <option value="+593" class="bg-bio-deep">🇪🇨 Ecuador (+593)</option>
+                                            <option value="+20" class="bg-bio-deep">🇪🇬 Egipto (+20)</option>
+                                            <option value="+503" class="bg-bio-deep">🇸🇻 El Salvador (+503)</option>
+                                            <option value="+971" class="bg-bio-deep">🇦🇪 Emiratos Árabes (+971)</option>
+                                            <option value="+421" class="bg-bio-deep">🇸🇰 Eslovaquia (+421)</option>
+                                            <option value="+386" class="bg-bio-deep">🇸🇮 Eslovenia (+386)</option>
+                                            <option value="+1" class="bg-bio-deep">🇺🇸 Estados Unidos (+1)</option>
+                                            <option value="+372" class="bg-bio-deep">🇪🇪 Estonia (+372)</option>
+                                            <option value="+251" class="bg-bio-deep">🇪🇹 Etiopía (+251)</option>
+                                            <option value="+63" class="bg-bio-deep">🇵🇭 Filipinas (+63)</option>
+                                            <option value="+358" class="bg-bio-deep">🇫🇮 Finlandia (+358)</option>
+                                            <option value="+33" class="bg-bio-deep">🇫🇷 Francia (+33)</option>
+                                            <option value="+241" class="bg-bio-deep">🇬🇦 Gabón (+241)</option>
+                                            <option value="+220" class="bg-bio-deep">🇬🇲 Gambia (+220)</option>
+                                            <option value="+995" class="bg-bio-deep">🇬🇪 Georgia (+995)</option>
+                                            <option value="+233" class="bg-bio-deep">🇬🇭 Ghana (+233)</option>
+                                            <option value="+30" class="bg-bio-deep">🇬🇷 Grecia (+30)</option>
+                                            <option value="+502" class="bg-bio-deep">🇬🇹 Guatemala (+502)</option>
+                                            <option value="+224" class="bg-bio-deep">🇬🇳 Guinea (+224)</option>
+                                            <option value="+240" class="bg-bio-deep">🇬🇶 Guinea Ecuatorial (+240)</option>
+                                            <option value="+509" class="bg-bio-deep">🇭🇹 Haití (+509)</option>
+                                            <option value="+504" class="bg-bio-deep">🇭🇳 Honduras (+504)</option>
+                                            <option value="+36" class="bg-bio-deep">🇭🇺 Hungría (+36)</option>
+                                            <option value="+91" class="bg-bio-deep">🇮🇳 India (+91)</option>
+                                            <option value="+62" class="bg-bio-deep">🇮🇩 Indonesia (+62)</option>
+                                            <option value="+964" class="bg-bio-deep">🇮🇶 Irak (+964)</option>
+                                            <option value="+98" class="bg-bio-deep">🇮🇷 Irán (+98)</option>
+                                            <option value="+353" class="bg-bio-deep">🇮🇪 Irlanda (+353)</option>
+                                            <option value="+354" class="bg-bio-deep">🇮🇸 Islandia (+354)</option>
+                                            <option value="+972" class="bg-bio-deep">🇮🇱 Israel (+972)</option>
+                                            <option value="+39" class="bg-bio-deep">🇮🇹 Italia (+39)</option>
+                                            <option value="+1876" class="bg-bio-deep">🇯🇲 Jamaica (+1876)</option>
+                                            <option value="+81" class="bg-bio-deep">🇯🇵 Japón (+81)</option>
+                                            <option value="+962" class="bg-bio-deep">🇯🇴 Jordania (+962)</option>
+                                            <option value="+7" class="bg-bio-deep">🇰🇿 Kazajistán (+7)</option>
+                                            <option value="+254" class="bg-bio-deep">🇰🇪 Kenia (+254)</option>
+                                            <option value="+965" class="bg-bio-deep">🇰🇼 Kuwait (+965)</option>
+                                            <option value="+856" class="bg-bio-deep">🇱🇦 Laos (+856)</option>
+                                            <option value="+371" class="bg-bio-deep">🇱🇻 Letonia (+371)</option>
+                                            <option value="+961" class="bg-bio-deep">🇱🇧 Líbano (+961)</option>
+                                            <option value="+218" class="bg-bio-deep">🇱🇾 Libia (+218)</option>
+                                            <option value="+423" class="bg-bio-deep">🇱🇮 Liechtenstein (+423)</option>
+                                            <option value="+370" class="bg-bio-deep">🇱🇹 Lituania (+370)</option>
+                                            <option value="+352" class="bg-bio-deep">🇱🇺 Luxemburgo (+352)</option>
+                                            <option value="+389" class="bg-bio-deep">🇲🇰 Macedonia del Norte (+389)</option>
+                                            <option value="+261" class="bg-bio-deep">🇲🇬 Madagascar (+261)</option>
+                                            <option value="+60" class="bg-bio-deep">🇲🇾 Malasia (+60)</option>
+                                            <option value="+223" class="bg-bio-deep">🇲🇱 Malí (+223)</option>
+                                            <option value="+356" class="bg-bio-deep">🇲🇹 Malta (+356)</option>
+                                            <option value="+212" class="bg-bio-deep">🇲🇦 Marruecos (+212)</option>
+                                            <option value="+230" class="bg-bio-deep">🇲🇺 Mauricio (+230)</option>
+                                            <option value="+222" class="bg-bio-deep">🇲🇷 Mauritania (+222)</option>
+                                            <option value="+52" class="bg-bio-deep">🇲🇽 México (+52)</option>
+                                            <option value="+373" class="bg-bio-deep">🇲🇩 Moldavia (+373)</option>
+                                            <option value="+377" class="bg-bio-deep">🇲🇨 Mónaco (+377)</option>
+                                            <option value="+976" class="bg-bio-deep">🇲🇳 Mongolia (+976)</option>
+                                            <option value="+382" class="bg-bio-deep">🇲🇪 Montenegro (+382)</option>
+                                            <option value="+258" class="bg-bio-deep">🇲🇿 Mozambique (+258)</option>
+                                            <option value="+264" class="bg-bio-deep">🇳🇦 Namibia (+264)</option>
+                                            <option value="+977" class="bg-bio-deep">🇳🇵 Nepal (+977)</option>
+                                            <option value="+505" class="bg-bio-deep">🇳🇮 Nicaragua (+505)</option>
+                                            <option value="+227" class="bg-bio-deep">🇳🇪 Níger (+227)</option>
+                                            <option value="+234" class="bg-bio-deep">🇳🇬 Nigeria (+234)</option>
+                                            <option value="+47" class="bg-bio-deep">🇳🇴 Noruega (+47)</option>
+                                            <option value="+64" class="bg-bio-deep">🇳🇿 Nueva Zelanda (+64)</option>
+                                            <option value="+968" class="bg-bio-deep">🇴🇲 Omán (+968)</option>
+                                            <option value="+31" class="bg-bio-deep">🇳🇱 Países Bajos (+31)</option>
+                                            <option value="+92" class="bg-bio-deep">🇵🇰 Pakistán (+92)</option>
+                                            <option value="+507" class="bg-bio-deep">🇵🇦 Panamá (+507)</option>
+                                            <option value="+595" class="bg-bio-deep">🇵🇾 Paraguay (+595)</option>
+                                            <option value="+51" class="bg-bio-deep">🇵🇪 Perú (+51)</option>
+                                            <option value="+48" class="bg-bio-deep">🇵🇱 Polonia (+48)</option>
+                                            <option value="+351" class="bg-bio-deep">🇵🇹 Portugal (+351)</option>
+                                            <option value="+44" class="bg-bio-deep">🇬🇧 Reino Unido (+44)</option>
+                                            <option value="+420" class="bg-bio-deep">🇨🇿 República Checa (+420)</option>
+                                            <option value="+1809" class="bg-bio-deep">🇩🇴 Rep. Dominicana (+1809)</option>
+                                            <option value="+40" class="bg-bio-deep">🇷🇴 Rumanía (+40)</option>
+                                            <option value="+7" class="bg-bio-deep">🇷🇺 Rusia (+7)</option>
+                                            <option value="+221" class="bg-bio-deep">🇸🇳 Senegal (+221)</option>
+                                            <option value="+381" class="bg-bio-deep">🇷🇸 Serbia (+381)</option>
+                                            <option value="+65" class="bg-bio-deep">🇸🇬 Singapur (+65)</option>
+                                            <option value="+963" class="bg-bio-deep">🇸🇾 Siria (+963)</option>
+                                            <option value="+27" class="bg-bio-deep">🇿🇦 Sudáfrica (+27)</option>
+                                            <option value="+249" class="bg-bio-deep">🇸🇩 Sudán (+249)</option>
+                                            <option value="+46" class="bg-bio-deep">🇸🇪 Suecia (+46)</option>
+                                            <option value="+41" class="bg-bio-deep">🇨🇭 Suiza (+41)</option>
+                                            <option value="+66" class="bg-bio-deep">🇹🇭 Tailandia (+66)</option>
+                                            <option value="+886" class="bg-bio-deep">🇹🇼 Taiwán (+886)</option>
+                                            <option value="+255" class="bg-bio-deep">🇹🇿 Tanzania (+255)</option>
+                                            <option value="+216" class="bg-bio-deep">🇹🇳 Túnez (+216)</option>
+                                            <option value="+90" class="bg-bio-deep">🇹🇷 Turquía (+90)</option>
+                                            <option value="+380" class="bg-bio-deep">🇺🇦 Ucrania (+380)</option>
+                                            <option value="+256" class="bg-bio-deep">🇺🇬 Uganda (+256)</option>
+                                            <option value="+598" class="bg-bio-deep">🇺🇾 Uruguay (+598)</option>
+                                            <option value="+998" class="bg-bio-deep">🇺🇿 Uzbekistán (+998)</option>
+                                            <option value="+58" class="bg-bio-deep">🇻🇪 Venezuela (+58)</option>
+                                            <option value="+84" class="bg-bio-deep">🇻🇳 Vietnam (+84)</option>
+                                            <option value="+967" class="bg-bio-deep">🇾🇪 Yemen (+967)</option>
+                                            <option value="+260" class="bg-bio-deep">🇿🇲 Zambia (+260)</option>
+                                            <option value="+263" class="bg-bio-deep">🇿🇼 Zimbabue (+263)</option>
                                         </select>
                                         <input type="tel" required id="formPhone" placeholder="600 000 000" 
                                                class="w-full px-4 py-3 rounded-xl bg-bio-surface border border-bio-border text-slate-100 placeholder-slate-500 text-xs focus:outline-none focus:border-bio-accent">
@@ -1943,6 +2171,21 @@
             if (!localStorage.getItem('agro_cookies_consent')) {
                 const b = document.getElementById('cookieConsentBanner');
                 if (b) b.classList.remove('hidden');
+            }
+        });
+
+        // Control desplegable de selector de idioma
+        function toggleLangDropdown() {
+            const menu = document.getElementById('langDropdownMenu');
+            if (menu) menu.classList.toggle('hidden');
+        }
+
+        // Cerrar selector si se hace clic fuera
+        document.addEventListener('click', (e) => {
+            const btn = document.getElementById('langDropdownBtn');
+            const menu = document.getElementById('langDropdownMenu');
+            if (btn && menu && !btn.contains(e.target) && !menu.contains(e.target)) {
+                menu.classList.add('hidden');
             }
         });
     </script>
