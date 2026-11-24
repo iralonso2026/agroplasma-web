@@ -108,11 +108,75 @@
             background: #22c55e;
         }
 
+        /* दिन का मोड (LIGHT THEME) */
+        html.theme-light body {
+            background-color: #f4f8f5;
+            color: #1e293b;
+        }
+        html.theme-light .glass-header {
+            background: rgba(255, 255, 255, 0.92);
+            border-bottom: 1px solid rgba(22, 163, 74, 0.22);
+        }
+        html.theme-light .glass-panel {
+            background: rgba(255, 255, 255, 0.94);
+            border: 1px solid rgba(22, 163, 74, 0.2);
+            box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08);
+        }
+        html.theme-light .bg-bio-deep {
+            background-color: #ffffff !important;
+        }
+        html.theme-light .bg-bio-dark,
+        html.theme-light .bg-bio-dark\/70 {
+            background-color: #ebf3ee !important;
+        }
+        html.theme-light .bg-bio-surface,
+        html.theme-light .bg-bio-surface\/80 {
+            background-color: #e4efe8 !important;
+        }
+        html.theme-light .border-bio-border,
+        html.theme-light .border-bio-border\/60,
+        html.theme-light .border-bio-border\/80 {
+            border-color: #cbd5e1 !important;
+        }
+        html.theme-light .text-white {
+            color: #0f172a !important;
+        }
+        html.theme-light .text-slate-200 {
+            color: #1e293b !important;
+        }
+        html.theme-light .text-slate-300 {
+            color: #334155 !important;
+        }
+        html.theme-light .text-slate-400 {
+            color: #475569 !important;
+        }
+        html.theme-light .text-bio-accent {
+            color: #15803d !important;
+        }
+        html.theme-light .bg-bio-accent {
+            background-color: #16a34a !important;
+            color: #ffffff !important;
+        }
+        html.theme-light .text-\[\#FFA928\] {
+            color: #c2410c !important;
+        }
+        html.theme-light .text-bio-cyan {
+            color: #0369a1 !important;
+        }
+        html.theme-light #algaeCanvas {
+            opacity: 0.28;
+        }
+
         @media print {
             .no-print { display: none !important; }
             body { background: white; color: black; }
         }
     </style>
+    <script>
+        if (localStorage.getItem('agro_theme') === 'light') {
+            document.documentElement.classList.add('theme-light');
+        }
+    </script>
 </head>
 <body class="antialiased selection:bg-[#F59300] selection:text-black">
 
@@ -189,6 +253,12 @@
             <div class="flex items-center gap-3">
                 <button onclick="showSection('productos'); document.getElementById('searchProductInput').focus();" class="p-2.5 rounded-xl bg-bio-surface hover:bg-bio-dark text-slate-300 border border-bio-border transition-colors" title="कैटलॉग में खोजें">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                </button>
+
+                <!-- दिन / रात थीम बटन -->
+                <button id="themeToggleBtn" onclick="toggleTheme()" class="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-bio-surface hover:bg-bio-dark text-slate-200 border border-bio-border font-mono text-xs font-bold transition-all shadow-sm" title="दिन / रात मोड बदलें">
+                    <span id="themeToggleIcon">☀️</span>
+                    <span id="themeToggleLabel" class="hidden sm:inline">दिन</span>
                 </button>
 
                 <!-- भाषा चयनकर्ता (6 आधिकारिक भाषाएं) -->
@@ -286,6 +356,15 @@
             <button onclick="showSection('nosotros'); toggleMobileMenu();" class="block w-full text-left py-2 hover:text-bio-accent">हमारे बारे में और फैक्ट्री</button>
             <button onclick="showSection('blog'); toggleMobileMenu();" class="block w-full text-left py-2 hover:text-bio-accent">क्षेत्रीय परीक्षण और ब्लॉग</button>
             <button onclick="showSection('contacto'); toggleMobileMenu();" class="block w-full text-left py-2 hover:text-bio-accent">B2B संपर्क</button>
+
+            <!-- मोबाइल के लिए दिन / रात मोड -->
+            <div class="pt-3 border-t border-bio-border flex items-center justify-between">
+                <span class="text-[10px] font-mono text-slate-400">थीम / दृश्य:</span>
+                <button type="button" onclick="toggleTheme()" class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-bio-surface text-slate-200 border border-bio-border font-mono text-xs font-bold">
+                    <span id="mobileThemeIcon">☀️</span>
+                    <span id="mobileThemeLabel">दिन के मोड पर जाएं</span>
+                </button>
+            </div>
             
             <!-- मोबाइल के लिए 6 भाषाएं -->
             <div class="pt-4 border-t border-bio-border space-y-2">
@@ -4688,7 +4767,29 @@
                 const b = document.getElementById('cookieConsentBanner');
                 if (b) b.classList.remove('hidden');
             }
+            updateThemeUI();
         });
+
+        function updateThemeUI() {
+            const isLight = document.documentElement.classList.contains('theme-light');
+            const icon = document.getElementById('themeToggleIcon');
+            const label = document.getElementById('themeToggleLabel');
+            const mIcon = document.getElementById('mobileThemeIcon');
+            const mLabel = document.getElementById('mobileThemeLabel');
+
+            if (icon) icon.textContent = isLight ? '🌙' : '☀️';
+            if (label) label.textContent = isLight ? 'रात' : 'दिन';
+            if (mIcon) mIcon.textContent = isLight ? '🌙' : '☀️';
+            if (mLabel) mLabel.textContent = isLight ? 'रात के मोड पर जाएं' : 'दिन के मोड पर जाएं';
+        }
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            html.classList.toggle('theme-light');
+            const isLight = html.classList.contains('theme-light');
+            localStorage.setItem('agro_theme', isLight ? 'light' : 'dark');
+            updateThemeUI();
+        }
 
         function toggleLangDropdown() {
             const menu = document.getElementById('langDropdownMenu');
